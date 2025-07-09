@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="0" failed="0" skipped="3">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-07-09T17:59:25 IST" name="Briskpe‑Cross‑Platform-Suite" finished-at="2025-07-09T17:59:56 IST" duration-ms="31289">
+    <groups>
+    </groups>
+    <test started-at="2025-07-09T17:59:25 IST" name="iOS" finished-at="2025-07-09T17:59:55 IST" duration-ms="29444">
+      <class name="com.briskpe.tests.LoginTest">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@38467116]" started-at="2025-07-09T17:59:25 IST" name="setUp" finished-at="2025-07-09T17:59:54 IST" duration-ms="29281" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ANDROID]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.SessionNotCreatedException">
+            <message>
+              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: No observatory URL matching to '/(Observatory listening on |An Observatory debugger and profiler on\s.+\sis available at: |The Dart VM service is listening on )((http|\/\/)[a-zA-Z0-9:/=_\-.\[\]]+)/' was found in the device log. Please make sure the application under test is configured properly according to https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: No observatory URL matching to '/(Observatory listening on |An Observatory debugger and profiler on\s.+\sis available at: |The Dart VM service is listening on )((http|\/\/)[a-zA-Z0-9:/=_\-.\[\]]+)/' was found in the device log. Please make sure the application under test is configured properly according to https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
+at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
+at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
+at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
+at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
+at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+at java.base/java.lang.Thread.run(Thread.java:842)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@38467116]" started-at="2025-07-09T17:59:55 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-09T17:59:55 IST" duration-ms="0" status="SKIP">
+          <exception class="org.openqa.selenium.SessionNotCreatedException">
+            <message>
+              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: No observatory URL matching to '/(Observatory listening on |An Observatory debugger and profiler on\s.+\sis available at: |The Dart VM service is listening on )((http|\/\/)[a-zA-Z0-9:/=_\-.\[\]]+)/' was found in the device log. Please make sure the application under test is configured properly according to https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: No observatory URL matching to '/(Observatory listening on |An Observatory debugger and profiler on\s.+\sis available at: |The Dart VM service is listening on )((http|\/\/)[a-zA-Z0-9:/=_\-.\[\]]+)/' was found in the device log. Please make sure the application under test is configured properly according to https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
+at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
+at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
+at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
+at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
+at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+at java.base/java.lang.Thread.run(Thread.java:842)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldLoginWithValidMobile -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.briskpe.tests.LoginTest@38467116]" started-at="2025-07-09T17:59:55 IST" name="tearDown" finished-at="2025-07-09T17:59:55 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.briskpe.tests.LoginTest -->
+    </test> <!-- iOS -->
+    <test started-at="2025-07-09T17:59:25 IST" name="Android" finished-at="2025-07-09T17:59:56 IST" duration-ms="30572">
+      <class name="com.briskpe.tests.LoginTest">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@65f8f5ae]" started-at="2025-07-09T17:59:25 IST" name="setUp" finished-at="2025-07-09T17:59:56 IST" duration-ms="30498" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ANDROID]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.SessionNotCreatedException">
+            <message>
+              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
+at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
+at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
+at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
+at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
+at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+at java.base/java.lang.Thread.run(Thread.java:842)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@65f8f5ae]" started-at="2025-07-09T17:59:56 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-09T17:59:56 IST" duration-ms="0" status="SKIP">
+          <exception class="org.openqa.selenium.SessionNotCreatedException">
+            <message>
+              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
+at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
+at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
+at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
+at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
+at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+at java.base/java.lang.Thread.run(Thread.java:842)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldLoginWithValidMobile -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.briskpe.tests.LoginTest@65f8f5ae]" started-at="2025-07-09T17:59:56 IST" name="tearDown" finished-at="2025-07-09T17:59:56 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.briskpe.tests.LoginTest -->
+    </test> <!-- Android -->
+    <test started-at="2025-07-09T17:59:25 IST" name="Web" finished-at="2025-07-09T17:59:56 IST" duration-ms="31289">
+      <class name="com.briskpe.tests.LoginTest">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@268f106e]" started-at="2025-07-09T17:59:25 IST" name="setUp" finished-at="2025-07-09T17:59:56 IST" duration-ms="31195" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ANDROID]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.SessionNotCreatedException">
+            <message>
+              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
+at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
+at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
+at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
+at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
+at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+at java.base/java.lang.Thread.run(Thread.java:842)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@268f106e]" started-at="2025-07-09T17:59:56 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-09T17:59:56 IST" duration-ms="1" status="SKIP">
+          <exception class="org.openqa.selenium.SessionNotCreatedException">
+            <message>
+              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
+at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
+at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
+at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
+at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
+at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
+at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
+at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
+at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+at java.base/java.lang.Thread.run(Thread.java:842)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldLoginWithValidMobile -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.briskpe.tests.LoginTest@268f106e]" started-at="2025-07-09T17:59:56 IST" name="tearDown" finished-at="2025-07-09T17:59:56 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.briskpe.tests.LoginTest -->
+    </test> <!-- Web -->
+  </suite> <!-- Briskpe‑Cross‑Platform-Suite -->
+</testng-results>
