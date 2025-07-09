@@ -3,10 +3,13 @@ package com.briskpe.tests;
 import com.briskpe.framework.core.Config;
 import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.pages.LoginPage;
+
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class LoginTest {
+
+    private utils.ElementUtils elementUtils;
 
     @Parameters("platform")
     @BeforeMethod
@@ -15,12 +18,14 @@ public class LoginTest {
         System.setProperty("platform", platform);
         DriverFactory.createDriver();
 
+        // Initialize ElementUtils with driver
+        elementUtils = new utils.ElementUtils(DriverFactory.getDriver());
+
         // For web: open application URL from config
         if ("WEB".equalsIgnoreCase(platform)) {
             String baseUrl = Config.get("url");
             Assert.assertNotNull(baseUrl, "❌ Config 'url' is null. Please check your config.properties file.");
             DriverFactory.getDriver().get(baseUrl);
-
         }
     }
 
@@ -28,18 +33,24 @@ public class LoginTest {
     public void shouldLoginWithValidMobile() {
         LoginPage loginPage = new LoginPage();
 
-        // 🔹 Flutter Web: executes JS to reveal semantics → waits for login tab
+        // 🔹 Wait for login tab
         Assert.assertTrue(loginPage.isLoginTabDisplayed(), "❌ Login tab should be visible");
 
-        // 🔹 Enter a valid mobile number and request OTP
+        // 🔹 Enter valid number and click Get OTP
         loginPage.enterMobileNumber("9833010550")
                 .tapGetOtp();
 
-        // 🔹 TODO: Add assertion here to verify OTP screen or confirmation state
-        // Example: Assert.assertTrue(new OtpPage().isOtpFieldDisplayed());
-        Assert.assertTrue(loginPage.isEnterOtpTabDisplayed(), "Enter OTP tab not found");
+        // 🔹 Assert OTP screen
+        Assert.assertTrue(loginPage.isEnterOtpTabDisplayed(), "❌ Enter OTP tab not found");
 
+        // 🔹 Enter OTP
+        loginPage.enterOTP(Config.get("OTP"));
 
+        // 🔹 Verify if Verify Button is displayed before clicking
+        Assert.assertTrue(elementUtils.isElementDisplayed(loginPage.getVerifyButton()), "❌ Verify Button not displayed");
+
+        // 🔹 Click Verify
+        loginPage.ClickVerifyButton();
     }
 
     @AfterMethod(alwaysRun = true)

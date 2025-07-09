@@ -11,8 +11,7 @@ import java.time.Duration;
 public class LoginPage {
 
     private final WebDriver driver = DriverFactory.getDriver();
-    private final Platform platform =
-            Platform.fromString(System.getProperty("platform", "WEB"));
+    private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
 
     /* ---------- Locators ---------- */
     private By loginTab() {
@@ -41,6 +40,19 @@ public class LoginPage {
         };
     }
 
+    private By OtpTextfield() {
+        return switch (platform) {
+            case WEB -> By.xpath("//input[@data-semantics-role='text-field'] | //android.view.View[@resource-id='verify_otp']/android.widget.EditText");
+            case ANDROID, IOS -> By.xpath("//*[@key='mobileNumberField']");
+        };
+    }
+
+    private By VerifyButton() {
+        return switch (platform) {
+            case WEB, ANDROID, IOS -> By.xpath("//*[@flt-semantics-identifier='btn_submit']");
+        };
+    }
+
     /* ---------- Page Actions ---------- */
 
     public boolean isLoginTabDisplayed() {
@@ -50,7 +62,6 @@ public class LoginPage {
                 WebElement placeholder = wait.until(ExpectedConditions.presenceOfElementLocated(
                         By.cssSelector("#body > flt-semantics-placeholder")
                 ));
-
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", placeholder);
                 Thread.sleep(1000); // Let Flutter render
             }
@@ -85,5 +96,23 @@ public class LoginPage {
             System.out.println("Enter OTP tab not found: " + e.getMessage());
             return false;
         }
+    }
+
+    public LoginPage enterOTP(String number) {
+        WaitUtils.untilVisible(OtpTextfield());
+        WebElement el = driver.findElement(OtpTextfield());
+        el.clear();
+        el.sendKeys(number);
+        return this;
+    }
+
+    public void ClickVerifyButton() {
+        WaitUtils.untilVisible(VerifyButton());
+        driver.findElement(VerifyButton()).click();
+        System.out.println("Clicked verify Button, waiting for DashBoard screen...");
+    }
+
+    public By getVerifyButton() {
+        return VerifyButton();
     }
 }
