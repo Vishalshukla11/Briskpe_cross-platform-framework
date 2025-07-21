@@ -14,42 +14,46 @@ public class LoginPage {
     private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
 
     /* ---------- Locators ---------- */
+
     private By loginTab() {
         return switch (platform) {
-            case WEB, ANDROID, IOS -> By.xpath("//*[@flt-semantics-identifier='mobile_number_entry']");
+            case WEB, ANDROID, IOS, MOBILE_WEB -> By.xpath("//*[@flt-semantics-identifier='mobile_number_entry']");
+
         };
     }
 
     private By mobileInput() {
         return switch (platform) {
-            case WEB -> By.cssSelector("input[aria-label^='mobileNumber']");
+            case WEB, MOBILE_WEB -> By.cssSelector("input[aria-label^='mobileNumber']");
             case ANDROID, IOS -> By.xpath("//*[@key='mobileNumberField']");
+
         };
     }
 
     private By getOtpButton() {
         return switch (platform) {
-            case WEB -> By.xpath("//flt-semantics[normalize-space(text())='Get OTP']");
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[normalize-space(text())='Get OTP']");
             case ANDROID, IOS -> By.xpath("//*[@key='getOtpBtn']");
+
         };
     }
 
     private By enterOtpTab() {
         return switch (platform) {
-            case WEB, ANDROID, IOS -> By.xpath("//*[@flt-semantics-identifier='verify_otp']");
+            case WEB, ANDROID, IOS,MOBILE_WEB -> By.xpath("//*[@flt-semantics-identifier='verify_otp']");
         };
     }
 
-    private By OtpTextfield() {
+    private By otpTextField() {
         return switch (platform) {
-            case WEB -> By.xpath("//input[@data-semantics-role='text-field'] | //android.view.View[@resource-id='verify_otp']/android.widget.EditText");
-            case ANDROID, IOS -> By.xpath("//*[@key='mobileNumberField']");
+            case WEB,MOBILE_WEB-> By.xpath("//input[@data-semantics-role='text-field']");
+            case ANDROID, IOS -> By.xpath("//*[@key='otpField']"); // ✅ fixed for mobile OTP entry
         };
     }
 
-    private By VerifyButton() {
+    private By verifyButton() {
         return switch (platform) {
-            case WEB, ANDROID, IOS -> By.xpath("//*[@flt-semantics-identifier='btn_submit']");
+            case WEB, ANDROID, IOS, MOBILE_WEB -> By.xpath("//*[@flt-semantics-identifier='btn_submit']");
         };
     }
 
@@ -63,19 +67,19 @@ public class LoginPage {
                         By.cssSelector("#body > flt-semantics-placeholder")
                 ));
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", placeholder);
-                Thread.sleep(1000); // Let Flutter render
+                Thread.sleep(1000); // Wait for rendering
             }
 
-            WaitUtils.untilVisible(loginTab());
+            WaitUtils.untilVisible(loginTab(), 30);
             return driver.findElement(loginTab()).isDisplayed();
         } catch (Exception e) {
-            System.out.println("Login tab not found: " + e.getMessage());
+            System.out.println("[ERROR] Login tab not found on " + platform + ": " + e.getMessage());
             return false;
         }
     }
 
     public LoginPage enterMobileNumber(String number) {
-        WaitUtils.untilVisible(mobileInput());
+        WaitUtils.untilVisible(mobileInput(), 30);
         WebElement el = driver.findElement(mobileInput());
         el.clear();
         el.sendKeys(number);
@@ -83,36 +87,36 @@ public class LoginPage {
     }
 
     public void tapGetOtp() {
-        WaitUtils.untilVisible(getOtpButton());
+        WaitUtils.untilVisible(getOtpButton(), 30);
         driver.findElement(getOtpButton()).click();
-        System.out.println("Clicked Get OTP, waiting for OTP screen...");
+        System.out.println("[INFO] Clicked Get OTP, waiting for OTP screen...");
     }
 
     public boolean isEnterOtpTabDisplayed() {
         try {
-            WaitUtils.untilVisible(enterOtpTab());
+            WaitUtils.untilVisible(enterOtpTab(), 30);
             return driver.findElement(enterOtpTab()).isDisplayed();
         } catch (Exception e) {
-            System.out.println("Enter OTP tab not found: " + e.getMessage());
+            System.out.println("[ERROR] Enter OTP tab not found on " + platform + ": " + e.getMessage());
             return false;
         }
     }
 
-    public LoginPage enterOTP(String number) {
-        WaitUtils.untilVisible(OtpTextfield());
-        WebElement el = driver.findElement(OtpTextfield());
+    public LoginPage enterOTP(String otp) {
+        WaitUtils.untilVisible(otpTextField(), 30);
+        WebElement el = driver.findElement(otpTextField());
         el.clear();
-        el.sendKeys(number);
+        el.sendKeys(otp);
         return this;
     }
 
-    public void ClickVerifyButton() {
-        WaitUtils.untilVisible(VerifyButton());
-        driver.findElement(VerifyButton()).click();
-        System.out.println("Clicked verify Button, waiting for DashBoard screen...");
+    public void clickVerifyButton() {
+        WaitUtils.untilVisible(verifyButton(), 30);
+        driver.findElement(verifyButton()).click();
+        System.out.println("[INFO] Clicked verify button, waiting for dashboard...");
     }
 
     public By getVerifyButton() {
-        return VerifyButton();
+        return verifyButton();
     }
 }

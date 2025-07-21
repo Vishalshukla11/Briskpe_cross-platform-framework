@@ -1,6 +1,9 @@
 C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\core\Config.java
 C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\core\DriverFactory.java
 C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\core\Platform.java
+C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\pages\DashBoard.java
 C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\pages\LoginPage.java
+C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\utils\ElementUtils.java
+C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\utils\ExtentManager.java
 C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\utils\ScreenshotUtils.java
 C:\Briskpe\Briskpe_cross-platform-framework\src\main\java\com\briskpe\framework\utils\WaitUtils.java

@@ -1,11 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 3, Errors: 0, Skipped: 3, Time elapsed: 32.08 s <<< FAILURE! -- in TestSuite
-com.briskpe.tests.LoginTest.setUp[ANDROID](0) -- Time elapsed: 29.88 s <<< FAILURE!
+Tests run: 10, Failures: 6, Errors: 0, Skipped: 4, Time elapsed: 2.261 s <<< FAILURE! -- in TestSuite
+com.briskpe.tests.LoginTest.setUp[android](0) -- Time elapsed: 1.889 s <<< FAILURE!
 org.openqa.selenium.SessionNotCreatedException: 
-Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: No observatory URL matching to '/(Observatory listening on |An Observatory debugger and profiler on\s.+\sis available at: |The Dart VM service is listening on )((http|\/\/)[a-zA-Z0-9:/=_\-.\[\]]+)/' was found in the device log. Please make sure the application under test is configured properly according to https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup. 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
 Build info: version: '4.34.0', revision: '707dcb4246*'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
 Driver info: io.appium.java_client.android.AndroidDriver
@@ -25,7 +25,7 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -53,10 +53,10 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:842)
 
-com.briskpe.tests.LoginTest.setUp[ANDROID](0) -- Time elapsed: 1.129 s <<< FAILURE!
+com.briskpe.tests.LoginTest.setUp[android](0) -- Time elapsed: 1.890 s <<< FAILURE!
 org.openqa.selenium.SessionNotCreatedException: 
-Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
 Build info: version: '4.34.0', revision: '707dcb4246*'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
 Driver info: io.appium.java_client.android.AndroidDriver
@@ -76,7 +76,7 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -104,10 +104,10 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:842)
 
-com.briskpe.tests.LoginTest.setUp[ANDROID](0) -- Time elapsed: 0.704 s <<< FAILURE!
+com.briskpe.tests.LoginTest.setUp[android](0) -- Time elapsed: 1.890 s <<< FAILURE!
 org.openqa.selenium.SessionNotCreatedException: 
-Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.63.185'
+Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
+Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
 Build info: version: '4.34.0', revision: '707dcb4246*'
 System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
 Driver info: io.appium.java_client.android.AndroidDriver
@@ -127,7 +127,7 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -138,6 +138,99 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
 	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
 	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+
+com.briskpe.tests.LoginTest.tearDown[[TestResult name=shouldLoginWithValidMobile status=SKIP method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@65987993] output={null}]](0) -- Time elapsed: 0.039 s <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null
+	at com.briskpe.tests.LoginTest.tearDown(LoginTest.java:89)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:805)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:623)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+
+com.briskpe.tests.LoginTest.tearDown[[TestResult name=shouldLoginWithValidMobile status=SKIP method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@333d4a8c] output={null}]](0) -- Time elapsed: 0.040 s <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null
+	at com.briskpe.tests.LoginTest.tearDown(LoginTest.java:89)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:805)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:623)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+
+com.briskpe.tests.LoginTest.tearDown[[TestResult name=shouldLoginWithValidMobile status=SKIP method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@6a8658ff] output={null}]](0) -- Time elapsed: 0.040 s <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null
+	at com.briskpe.tests.LoginTest.tearDown(LoginTest.java:89)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:805)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:623)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)

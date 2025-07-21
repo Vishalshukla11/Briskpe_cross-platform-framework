@@ -1,60 +1,76 @@
 package com.briskpe.tests;
 
+import com.aventstack.extentreports.*;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.briskpe.framework.core.Config;
 import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.pages.LoginPage;
-
+import com.briskpe.framework.utils.ElementUtils;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-public class LoginTest {
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    private utils.ElementUtils elementUtils;
+public class LoginTest extends BaseTest {
 
-    @Parameters("platform")
-    @BeforeMethod
-    public void setUp(@Optional("WEB") String platform) {
-        // Set platform for driver and framework context
-        System.setProperty("platform", platform);
-        DriverFactory.createDriver();
+    @BeforeSuite
+    public void initReport() {
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String reportPath = System.getProperty("user.dir") + "/reports/LoginTestReport_" + timestamp + ".html";
 
-        // Initialize ElementUtils with driver
-        elementUtils = new utils.ElementUtils(DriverFactory.getDriver());
+        ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
+        extent = new ExtentReports();
+        extent.attachReporter(sparkReporter);
 
-        // For web: open application URL from config
-        if ("WEB".equalsIgnoreCase(platform)) {
-            String baseUrl = Config.get("url");
-            Assert.assertNotNull(baseUrl, "❌ Config 'url' is null. Please check your config.properties file.");
-            DriverFactory.getDriver().get(baseUrl);
-        }
+        extent.setSystemInfo("Tester", Config.get("testerName"));
+        extent.setSystemInfo("Environment", Config.get("environment"));
+        extent.setSystemInfo("Platform", System.getProperty("platform", "WEB"));
     }
 
     @Test
     public void shouldLoginWithValidMobile() {
+        test = extent.createTest("Login Test with Valid Mobile");
+
         LoginPage loginPage = new LoginPage();
+        String mobileNumber = Config.get("mobileNo");
+        String otp = Config.get("OTP");
 
-        // 🔹 Wait for login tab
-        Assert.assertTrue(loginPage.isLoginTabDisplayed(), "❌ Login tab should be visible");
+        test.info("🔹 Checking Login tab visibility");
+        Assert.assertTrue(loginPage.isLoginTabDisplayed(), "❌ Login tab not visible");
 
-        // 🔹 Enter valid number and click Get OTP
-        loginPage.enterMobileNumber("9833010550")
-                .tapGetOtp();
+        test.info("🔹 Entering mobile number: " + mobileNumber);
+        loginPage.enterMobileNumber(mobileNumber).tapGetOtp();
 
-        // 🔹 Assert OTP screen
-        Assert.assertTrue(loginPage.isEnterOtpTabDisplayed(), "❌ Enter OTP tab not found");
+        test.info("🔹 Checking OTP screen...");
+        Assert.assertTrue(loginPage.isEnterOtpTabDisplayed(), "❌ OTP screen not visible");
 
-        // 🔹 Enter OTP
-        loginPage.enterOTP(Config.get("OTP"));
+        test.info("🔹 Entering OTP: " + otp);
+        loginPage.enterOTP(otp);
 
-        // 🔹 Verify if Verify Button is displayed before clicking
-        Assert.assertTrue(elementUtils.isElementDisplayed(loginPage.getVerifyButton()), "❌ Verify Button not displayed");
+        test.info("🔹 Clicking Verify...");
+        Assert.assertTrue(elementUtils.isElementDisplayed(loginPage.getVerifyButton()), "❌ Verify button not visible");
+        loginPage.clickVerifyButton();
 
-        // 🔹 Click Verify
-        loginPage.ClickVerifyButton();
+        test.pass("✅ Login completed successfully");
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown() {
+    public void tearDownLoginTest(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            test.fail("❌ Test Failed: " + result.getThrowable());
+        } else if (result.getStatus() == ITestResult.SKIP) {
+            test.skip("⚠️ Test Skipped: " + result.getThrowable());
+        } else {
+            test.pass("✅ Test Passed");
+        }
+
         DriverFactory.quitDriver();
+    }
+
+    @AfterSuite
+    public void flushLoginReport() {
+        extent.flush();
     }
 }

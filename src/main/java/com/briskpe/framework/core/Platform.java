@@ -1,11 +1,11 @@
 package com.briskpe.framework.core;
 
 public enum Platform {
-    WEB, ANDROID, IOS;
+    WEB, ANDROID, IOS, MOBILE_WEB;
 
     public static Platform fromString(String platform) {
         if (platform == null) {
-            throw new IllegalArgumentException("Platform is null. Please set it using -Dplatform=WEB or in config.properties");
+            throw new IllegalArgumentException("Platform is null. Set it using -Dplatform or config.properties");
         }
         return Platform.valueOf(platform.toUpperCase());
     }

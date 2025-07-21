@@ -8,6 +8,7 @@
     <parameter name="platform" value="WEB"/>
     <classes>
       <class name="com.briskpe.tests.LoginTest"/>
+      <class name="com.briskpe.tests.DashBoardTest"/>
     </classes>
   </test>
 

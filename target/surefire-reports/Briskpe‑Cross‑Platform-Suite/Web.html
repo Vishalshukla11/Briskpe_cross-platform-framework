@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/0/1</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Jul 09 17:59:25 IST 2025</td>
+<td>Started on:</td><td>Thu Jul 17 13:41:54 IST 2025</td>
 </tr>
-<tr><td>Total time:</td><td>31 seconds (31289 ms)</td>
+<tr><td>Total time:</td><td>1 seconds (1250 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,9 +76,9 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.briskpe.tests.LoginTest.setUp()'><b>setUp</b><br>Test class: com.briskpe.tests.LoginTest<br>Parameters: ANDROID</td>
-<td><div><pre>org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
-Host info: host: &apos;VISHALSHUKLA&apos;, ip: &apos;10.188.63.185&apos;
+<td title='com.briskpe.tests.LoginTest.setUp()'><b>setUp</b><br>Test class: com.briskpe.tests.LoginTest<br>Parameters: android</td>
+<td><div><pre>org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
+Host info: host: &apos;VISHALSHUKLA&apos;, ip: &apos;10.188.61.220&apos;
 Build info: version: &apos;4.34.0&apos;, revision: &apos;707dcb4246*&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
 Driver info: io.appium.java_client.android.AndroidDriver
@@ -98,15 +98,15 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:842)
-... Removed 21 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1818882065", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1818882065'><pre>org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
-Host info: host: &apos;VISHALSHUKLA&apos;, ip: &apos;10.188.63.185&apos;
+... Removed 21 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace408554752", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace408554752'><pre>org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
+Host info: host: &apos;VISHALSHUKLA&apos;, ip: &apos;10.188.61.220&apos;
 Build info: version: &apos;4.34.0&apos;, revision: &apos;707dcb4246*&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
 Driver info: io.appium.java_client.android.AndroidDriver
@@ -126,7 +126,7 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -154,8 +154,50 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:842)
 </pre></div></td>
-<td>31</td>
-<td>com.briskpe.tests.LoginTest@268f106e</td></tr>
+<td>1</td>
+<td>com.briskpe.tests.LoginTest@65987993</td></tr>
+<tr>
+<td title='com.briskpe.tests.LoginTest.tearDown()'><b>tearDown</b><br>Test class: com.briskpe.tests.LoginTest<br>Parameters: [TestResult name=shouldLoginWithValidMobile status=SKIP method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@65987993] output={null}]</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentTest.skip(String)&quot; because &quot;com.briskpe.tests.LoginTest.test&quot; is null
+	at com.briskpe.tests.LoginTest.tearDown(LoginTest.java:89)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+... Removed 22 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace2083609087", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2083609087'><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentTest.skip(String)&quot; because &quot;com.briskpe.tests.LoginTest.test&quot; is null
+	at com.briskpe.tests.LoginTest.tearDown(LoginTest.java:89)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
+	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
+	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:805)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:623)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+</pre></div></td>
+<td>0</td>
+<td>com.briskpe.tests.LoginTest@65987993</td></tr>
 </table><p>
 <table width='100%' border='1' class='invocation-skipped'>
 <tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
@@ -167,8 +209,8 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 </tr>
 <tr>
 <td title='com.briskpe.tests.LoginTest.shouldLoginWithValidMobile()'><b>shouldLoginWithValidMobile</b><br>Test class: com.briskpe.tests.LoginTest</td>
-<td><div><pre>org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
-Host info: host: &apos;VISHALSHUKLA&apos;, ip: &apos;10.188.63.185&apos;
+<td><div><pre>org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
+Host info: host: &apos;VISHALSHUKLA&apos;, ip: &apos;10.188.61.220&apos;
 Build info: version: &apos;4.34.0&apos;, revision: &apos;707dcb4246*&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
 Driver info: io.appium.java_client.android.AndroidDriver
@@ -188,15 +230,15 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:842)
-... Removed 21 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace805829130", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace805829130'><pre>org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: The instrumentation process cannot be initialized. Make sure the application under test does not crash and investigate the logcat output. 
-Host info: host: &apos;VISHALSHUKLA&apos;, ip: &apos;10.188.63.185&apos;
+... Removed 21 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace498824643", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace498824643'><pre>org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
+Host info: host: &apos;VISHALSHUKLA&apos;, ip: &apos;10.188.61.220&apos;
 Build info: version: &apos;4.34.0&apos;, revision: &apos;707dcb4246*&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
 Driver info: io.appium.java_client.android.AndroidDriver
@@ -216,7 +258,7 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
 	at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:16)
+	at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -245,7 +287,7 @@ Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPack
 	at java.base/java.lang.Thread.run(Thread.java:842)
 </pre></div></td>
 <td>0</td>
-<td>com.briskpe.tests.LoginTest@268f106e</td></tr>
+<td>com.briskpe.tests.LoginTest@65987993</td></tr>
 </table><p>
 </body>
 </html>

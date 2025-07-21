@@ -1,8 +1,12 @@
+com\briskpe\framework\pages\DashBoard.class
 com\briskpe\framework\utils\ScreenshotUtils.class
 com\briskpe\framework\utils\WaitUtils.class
+com\briskpe\framework\pages\DashBoard$1.class
 com\briskpe\framework\pages\LoginPage$1.class
+com\briskpe\framework\utils\ExtentManager.class
 com\briskpe\framework\core\Platform.class
 com\briskpe\framework\pages\LoginPage.class
 com\briskpe\framework\core\DriverFactory$1.class
 com\briskpe\framework\core\Config.class
 com\briskpe\framework\core\DriverFactory.class
+com\briskpe\framework\utils\ElementUtils.class
