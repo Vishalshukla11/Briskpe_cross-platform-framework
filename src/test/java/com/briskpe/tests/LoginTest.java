@@ -12,7 +12,6 @@ import org.testng.annotations.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 public class LoginTest extends BaseTest {
 
     @BeforeSuite
@@ -54,6 +53,14 @@ public class LoginTest extends BaseTest {
         loginPage.clickVerifyButton();
 
         test.pass("✅ Login completed successfully");
+    }
+
+    @Test
+    public void shouldNotLoginWithInvalidMobileNumber()
+    {
+        test= extent.createTest("Login with inValid Mobile Number ");
+        LoginPage loginPage = new LoginPage();
+
     }
 
     @AfterMethod(alwaysRun = true)

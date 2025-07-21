@@ -58,7 +58,7 @@ public class DashBoard {
 
     private By getPendingActionLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='navitem-pending_actions']");
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='navitem-pending_actions']//span");
             case ANDROID, IOS -> AppiumBy.flutterKey("navitem-pending_actions");
         };
     }
@@ -167,19 +167,23 @@ public class DashBoard {
     }
 
     public void clickPendingAction() {
-        JavaScriptUtils.jsClick(getPendingActionLocator(), "Pending Actions");
+        JavaScriptUtils.JsClick(getPendingActionLocator(),driver);
     }
 
     public void clickReceivedPayment() {
-        clickElement(getReceivedLocator(), "Received Payments");
+        JavaScriptUtils.JsClick(getReceivedLocator(),driver);
     }
 
     public void clickRequestedPayment() {
-        clickElement(getRequestedPaymentLocator(), "Requested Payments");
+        JavaScriptUtils.JsClick(getRequestedPaymentLocator(),driver);
     }
 
     public void clickPaymentLink() {
-        clickElement(getPaymentLinkLocator(), "Payment Links");
+        JavaScriptUtils.JsClick(getPaymentLinkLocator(),driver);
+    }
+
+    public  void WaitTillpendingButtonIsClickble(){
+        WaitUtils.waitUntilElementIsClickable(getPendingActionLocator(),20);
     }
 
     // Helper Methods

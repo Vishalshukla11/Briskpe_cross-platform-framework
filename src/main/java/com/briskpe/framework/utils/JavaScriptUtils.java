@@ -115,4 +115,18 @@ public class JavaScriptUtils {
             throw new RuntimeException("❌ Click failed for element: " + elementDescription + " → " + e.getMessage(), e);
         }
     }
+    /**
+     * Clicks an element using JavaScript Executor.
+     * Useful when normal Selenium click is intercepted or blocked by overlays.
+     *
+     * @param locator By locator of the element
+     * @param driver  WebDriver instance
+     */
+    public static void JsClick(By locator, WebDriver driver) {
+        WebElement element = driver.findElement(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+
+
 }

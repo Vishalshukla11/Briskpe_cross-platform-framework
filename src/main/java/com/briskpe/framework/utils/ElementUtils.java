@@ -4,6 +4,8 @@ import com.briskpe.framework.core.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Random;
+
 public class ElementUtils {
     private final WebDriver driver;
 
@@ -26,4 +28,6 @@ public class ElementUtils {
             return false;
         }
     }
+
+
 }
