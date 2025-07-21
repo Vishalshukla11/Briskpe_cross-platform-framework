@@ -1,11 +1,13 @@
 package com.briskpe.framework.pages;
 
+import com.briskpe.framework.core.Config;
 import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.core.Platform;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import com.briskpe.framework.utils.WaitUtils;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,6 +15,24 @@ public class DashBoard {
 
     private final WebDriver driver = DriverFactory.getDriver();
     private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
+
+    // Execute JS Query only if platform is WEB
+    public void executeJsQueryIfWeb() {
+        if (platform == Platform.WEB) {
+            try {
+                String jsQuery = Config.get("js.Query");
+                if (jsQuery != null && !jsQuery.isEmpty()) {
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+                    js.executeScript(jsQuery);
+                    System.out.println("✅ JS Query executed on Web platform.");
+                } else {
+                    System.out.println("⚠️ js.Query is empty or not configured.");
+                }
+            } catch (Exception e) {
+                System.out.println("❌ Failed to execute JS Query: " + e.getMessage());
+            }
+        }
+    }
 
     // Locators
     private By getAppTourScreenLocator() {
@@ -70,13 +90,13 @@ public class DashBoard {
             case ANDROID, IOS -> AppiumBy.flutterKey("navitem-requested_payments");
         };
     }
+
     private By getRequestedPaymentPageLocator() {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='screen_paymentrequest_list']");
             case ANDROID, IOS -> AppiumBy.flutterKey("screen_paymentrequest_list");
         };
     }
-
 
     private By getPaymentLinkLocator() {
         return switch (platform) {
@@ -116,6 +136,7 @@ public class DashBoard {
     public boolean isReceivedPaymentVisible() {
         return isElementVisible(getReceivedLocator(), "Received Payments");
     }
+
     public boolean isReceivedPaymentPageVisible() {
         return isElementVisible(getReceivedPaymentPageLocator(), "Received Payments");
     }
@@ -123,6 +144,7 @@ public class DashBoard {
     public boolean isRequestedPaymentVisible() {
         return isElementVisible(getRequestedPaymentLocator(), "Requested Payments");
     }
+
     public boolean isRequestedPaymentPageVisible() {
         return isElementVisible(getRequestedPaymentPageLocator(), "Requested Payments");
     }
@@ -145,9 +167,7 @@ public class DashBoard {
     }
 
     public void clickPendingAction() {
-       // clickElement(getPendingActionLocator(), "Pending Actions");
-        JavaScriptUtils.jsClick(getPendingActionLocator(),"Pending Actions");
-
+        JavaScriptUtils.jsClick(getPendingActionLocator(), "Pending Actions");
     }
 
     public void clickReceivedPayment() {

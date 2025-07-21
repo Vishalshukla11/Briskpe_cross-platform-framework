@@ -1,133 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="3" passed="0" failed="0" skipped="3">
+<testng-results ignored="0" total="5" passed="2" failed="3" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-07-17T13:41:54 IST" name="Briskpe‑Cross‑Platform-Suite" finished-at="2025-07-17T13:41:56 IST" duration-ms="1250">
+  <suite started-at="2025-07-21T16:43:50 IST" name="Briskpe‑Cross‑Platform-Suite" finished-at="2025-07-21T16:44:58 IST" duration-ms="67973">
     <groups>
     </groups>
-    <test started-at="2025-07-17T13:41:54 IST" name="iOS" finished-at="2025-07-17T13:41:56 IST" duration-ms="1249">
+    <test started-at="2025-07-21T16:43:50 IST" name="iOS" finished-at="2025-07-21T16:44:11 IST" duration-ms="20241">
       <class name="com.briskpe.tests.LoginTest">
-        <test-method is-config="true" signature="initReport()[pri:0, instance:com.briskpe.tests.LoginTest@333d4a8c]" started-at="2025-07-17T13:41:54 IST" name="initReport" finished-at="2025-07-17T13:41:54 IST" duration-ms="162" status="PASS">
+        <test-method is-config="true" signature="startReport()[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81]" started-at="2025-07-21T16:43:50 IST" name="startReport" finished-at="2025-07-21T16:43:50 IST" duration-ms="171" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startReport -->
+        <test-method is-config="true" signature="initReport()[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81]" started-at="2025-07-21T16:43:50 IST" name="initReport" finished-at="2025-07-21T16:43:50 IST" depends-on-methods="com.briskpe.tests.BaseTest.startReport" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initReport -->
-        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@333d4a8c]" started-at="2025-07-17T13:41:55 IST" name="setUp" finished-at="2025-07-17T13:41:56 IST" duration-ms="1082" status="FAIL">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method,java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81]" started-at="2025-07-21T16:43:50 IST" name="setUp" finished-at="2025-07-21T16:43:55 IST" duration-ms="4691" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[android]]>
+                <![CDATA[public void com.briskpe.tests.LoginTest.shouldLoginWithValidMobile()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[IOS]]>
               </value>
             </param>
           </params>
-          <exception class="org.openqa.selenium.SessionNotCreatedException">
-            <message>
-              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
-at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
-at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
-at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
-at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
-at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:842)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@333d4a8c]" started-at="2025-07-17T13:41:56 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-17T13:41:56 IST" duration-ms="0" status="SKIP">
-          <exception class="org.openqa.selenium.SessionNotCreatedException">
+        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81]" started-at="2025-07-21T16:43:55 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-21T16:44:05 IST" duration-ms="10206" status="FAIL">
+          <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
+              <![CDATA[❌ Login tab not visible expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
-at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
-at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
-at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
-at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
-at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
+              <![CDATA[java.lang.AssertionError: ❌ Login tab not visible expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at com.briskpe.tests.LoginTest.shouldLoginWithValidMobile(LoginTest.java:41)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
 at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
@@ -146,183 +66,87 @@ at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecut
 at java.base/java.lang.Thread.run(Thread.java:842)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldLoginWithValidMobile -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@333d4a8c]" started-at="2025-07-17T13:41:56 IST" name="tearDown" finished-at="2025-07-17T13:41:56 IST" duration-ms="1" status="FAIL">
+        <test-method is-config="true" signature="tearDownLoginTest(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81]" started-at="2025-07-21T16:44:06 IST" name="tearDownLoginTest" finished-at="2025-07-21T16:44:11 IST" duration-ms="4951" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=SKIP method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@333d4a8c] output={null}]]]>
+                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=FAILURE method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81] output={null}]]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null
-at com.briskpe.tests.LoginTest.tearDown(LoginTest.java:89)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:805)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:623)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:842)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownLoginTest -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81]" started-at="2025-07-21T16:44:11 IST" name="tearDown" finished-at="2025-07-21T16:44:11 IST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=FAILURE method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="flushReport()[pri:0, instance:com.briskpe.tests.LoginTest@333d4a8c]" started-at="2025-07-17T13:41:56 IST" name="flushReport" finished-at="2025-07-17T13:41:56 IST" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="flushLoginReport()[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81]" started-at="2025-07-21T16:44:58 IST" name="flushLoginReport" finished-at="2025-07-21T16:44:59 IST" duration-ms="579" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- flushLoginReport -->
+        <test-method is-config="true" signature="endReport()[pri:0, instance:com.briskpe.tests.LoginTest@7dfd3c81]" started-at="2025-07-21T16:44:59 IST" name="endReport" finished-at="2025-07-21T16:44:59 IST" depends-on-methods="com.briskpe.tests.LoginTest.flushLoginReport" duration-ms="17" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- endReport -->
+      </class> <!-- com.briskpe.tests.LoginTest -->
+      <class name="com.briskpe.tests.DashBoardTest">
+        <test-method is-config="true" signature="initReport()[pri:0, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:43:50 IST" name="initReport" finished-at="2025-07-21T16:43:50 IST" depends-on-methods="com.briskpe.tests.BaseTest.startReport" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initReport -->
+        <test-method is-config="true" signature="flushReport()[pri:0, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:59 IST" name="flushReport" finished-at="2025-07-21T16:44:59 IST" depends-on-methods="com.briskpe.tests.LoginTest.flushLoginReport" duration-ms="32" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReport -->
-      </class> <!-- com.briskpe.tests.LoginTest -->
+      </class> <!-- com.briskpe.tests.DashBoardTest -->
     </test> <!-- iOS -->
-    <test started-at="2025-07-17T13:41:54 IST" name="Android" finished-at="2025-07-17T13:41:56 IST" duration-ms="1250">
+    <test started-at="2025-07-21T16:43:50 IST" name="Android" finished-at="2025-07-21T16:44:11 IST" duration-ms="20226">
       <class name="com.briskpe.tests.LoginTest">
-        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@6a8658ff]" started-at="2025-07-17T13:41:55 IST" name="setUp" finished-at="2025-07-17T13:41:56 IST" duration-ms="1082" status="FAIL">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method,java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@4dc27487]" started-at="2025-07-21T16:43:50 IST" name="setUp" finished-at="2025-07-21T16:43:55 IST" duration-ms="4670" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[android]]>
+                <![CDATA[public void com.briskpe.tests.LoginTest.shouldLoginWithValidMobile()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[ANDROID]]>
               </value>
             </param>
           </params>
-          <exception class="org.openqa.selenium.SessionNotCreatedException">
-            <message>
-              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
-at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
-at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
-at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
-at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
-at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:842)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@6a8658ff]" started-at="2025-07-17T13:41:56 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-17T13:41:56 IST" duration-ms="0" status="SKIP">
-          <exception class="org.openqa.selenium.SessionNotCreatedException">
+        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@4dc27487]" started-at="2025-07-21T16:43:55 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-21T16:44:05 IST" duration-ms="10122" status="FAIL">
+          <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
+              <![CDATA[❌ Login tab not visible expected [true] but found [false]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
-at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
-at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
-at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
-at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
-at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
+              <![CDATA[java.lang.AssertionError: ❌ Login tab not visible expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at com.briskpe.tests.LoginTest.shouldLoginWithValidMobile(LoginTest.java:41)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
 at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
@@ -341,250 +165,226 @@ at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecut
 at java.base/java.lang.Thread.run(Thread.java:842)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldLoginWithValidMobile -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@6a8658ff]" started-at="2025-07-17T13:41:56 IST" name="tearDown" finished-at="2025-07-17T13:41:56 IST" duration-ms="1" status="FAIL">
+        <test-method is-config="true" signature="tearDownLoginTest(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@4dc27487]" started-at="2025-07-21T16:44:06 IST" name="tearDownLoginTest" finished-at="2025-07-21T16:44:11 IST" duration-ms="4979" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=SKIP method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@6a8658ff] output={null}]]]>
+                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=FAILURE method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@4dc27487] output={null}]]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null
-at com.briskpe.tests.LoginTest.tearDown(LoginTest.java:89)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:805)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:623)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:842)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownLoginTest -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@4dc27487]" started-at="2025-07-21T16:44:11 IST" name="tearDown" finished-at="2025-07-21T16:44:11 IST" duration-ms="11" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=FAILURE method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@4dc27487] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- com.briskpe.tests.LoginTest -->
     </test> <!-- Android -->
-    <test started-at="2025-07-17T13:41:54 IST" name="Web" finished-at="2025-07-17T13:41:56 IST" duration-ms="1250">
+    <test started-at="2025-07-21T16:43:50 IST" name="Web" finished-at="2025-07-21T16:44:58 IST" duration-ms="67973">
       <class name="com.briskpe.tests.LoginTest">
-        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@65987993]" started-at="2025-07-17T13:41:55 IST" name="setUp" finished-at="2025-07-17T13:41:56 IST" duration-ms="1082" status="FAIL">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method,java.lang.String)[pri:0, instance:com.briskpe.tests.LoginTest@431cd9b2]" started-at="2025-07-21T16:43:50 IST" name="setUp" finished-at="2025-07-21T16:43:56 IST" duration-ms="5357" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[android]]>
+                <![CDATA[public void com.briskpe.tests.LoginTest.shouldLoginWithValidMobile()]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[WEB]]>
               </value>
             </param>
           </params>
-          <exception class="org.openqa.selenium.SessionNotCreatedException">
-            <message>
-              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
-at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
-at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
-at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
-at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
-at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:842)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@65987993]" started-at="2025-07-17T13:41:56 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-17T13:41:56 IST" duration-ms="0" status="SKIP">
-          <exception class="org.openqa.selenium.SessionNotCreatedException">
-            <message>
-              <![CDATA[Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Device RZ8M43K8GJY was not in the list of connected devices 
-Host info: host: 'VISHALSHUKLA', ip: '10.188.61.220'
-Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.briskpe.sme_portal.Main..., appium:appPackage: com.briskpe.sme.mobile.staging, appium:automationName: Flutter, appium:noReset: true, appium:udid: RZ8M43K8GJY, platformName: ANDROID}
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:114)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:75)
-at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:61)
-at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:179)
-at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:244)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
-at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:173)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
-at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
-at com.briskpe.framework.core.DriverFactory.createAndroidDriver(DriverFactory.java:124)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:53)
-at com.briskpe.framework.core.DriverFactory.createDriver(DriverFactory.java:42)
-at com.briskpe.tests.LoginTest.setUp(LoginTest.java:41)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:842)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+        <test-method signature="shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@431cd9b2]" started-at="2025-07-21T16:43:56 IST" name="shouldLoginWithValidMobile" finished-at="2025-07-21T16:44:07 IST" duration-ms="10941" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- shouldLoginWithValidMobile -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@65987993]" started-at="2025-07-17T13:41:56 IST" name="tearDown" finished-at="2025-07-17T13:41:56 IST" duration-ms="1" status="FAIL">
+        <test-method is-config="true" signature="tearDownLoginTest(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@431cd9b2]" started-at="2025-07-21T16:44:07 IST" name="tearDownLoginTest" finished-at="2025-07-21T16:44:13 IST" duration-ms="6418" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=SKIP method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@65987993] output={null}]]]>
+                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=SUCCESS method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@431cd9b2] output={null}]]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
-            <message>
-              <![CDATA[Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentTest.skip(String)" because "com.briskpe.tests.LoginTest.test" is null
-at com.briskpe.tests.LoginTest.tearDown(LoginTest.java:89)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:805)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:623)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:842)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownLoginTest -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.LoginTest@431cd9b2]" started-at="2025-07-21T16:44:13 IST" name="tearDown" finished-at="2025-07-21T16:44:13 IST" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=shouldLoginWithValidMobile status=SUCCESS method=LoginTest.shouldLoginWithValidMobile()[pri:0, instance:com.briskpe.tests.LoginTest@431cd9b2] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- com.briskpe.tests.LoginTest -->
+      <class name="com.briskpe.tests.DashBoardTest">
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method,java.lang.String)[pri:0, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:13 IST" name="setUp" finished-at="2025-07-21T16:44:16 IST" duration-ms="2599" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.briskpe.tests.DashBoardTest.clickSkipButtonTest() throws java.lang.InterruptedException]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[WEB]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="clickSkipButtonTest()[pri:1, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:16 IST" name="clickSkipButtonTest" finished-at="2025-07-21T16:44:31 IST" duration-ms="15417" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickSkipButtonTest -->
+        <test-method is-config="true" signature="tearDownTestWithScreenshot(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:31 IST" name="tearDownTestWithScreenshot" finished-at="2025-07-21T16:44:31 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=clickSkipButtonTest status=SUCCESS method=DashBoardTest.clickSkipButtonTest()[pri:1, instance:com.briskpe.tests.DashBoardTest@4b8d604b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownTestWithScreenshot -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:31 IST" name="tearDown" finished-at="2025-07-21T16:44:36 IST" duration-ms="4450" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=clickSkipButtonTest status=SUCCESS method=DashBoardTest.clickSkipButtonTest()[pri:1, instance:com.briskpe.tests.DashBoardTest@4b8d604b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp(java.lang.reflect.Method,java.lang.String)[pri:0, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:36 IST" name="setUp" finished-at="2025-07-21T16:44:38 IST" duration-ms="2789" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.briskpe.tests.DashBoardTest.verifyUserCanNavigateToSideMenuItems() throws java.lang.InterruptedException]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[WEB]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="verifyUserCanNavigateToSideMenuItems()[pri:2, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:38 IST" name="verifyUserCanNavigateToSideMenuItems" finished-at="2025-07-21T16:44:53 IST" duration-ms="14922" status="FAIL">
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[❌ Click failed for element: Pending Actions → ❌ Flutter JS execution failed]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.RuntimeException: ❌ Click failed for element: Pending Actions → ❌ Flutter JS execution failed
+at com.briskpe.framework.utils.JavaScriptUtils.jsClick(JavaScriptUtils.java:115)
+at com.briskpe.framework.pages.DashBoard.clickPendingAction(DashBoard.java:170)
+at com.briskpe.tests.DashBoardTest.verifyUserCanNavigateToSideMenuItems(DashBoardTest.java:44)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: java.lang.RuntimeException: ❌ Flutter JS execution failed
+at com.briskpe.framework.utils.JavaScriptUtils.executeFlutterPlaceholderJs(JavaScriptUtils.java:35)
+at com.briskpe.framework.utils.JavaScriptUtils.jsClick(JavaScriptUtils.java:104)
+... 24 more
+Caused by: org.openqa.selenium.JavascriptException: javascript error: Cannot read properties of null (reading 'click')
+  (Session info: chrome=138.0.7204.158)
+Build info: version: '4.34.0', revision: '707dcb4246*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [6e774b84deaf6f317d55cdbe993bea0e, executeScript {args=[], script=document.querySelector('#body > flt-semantics-placeholder').click();}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.158, chrome: {chromedriverVersion: 138.0.7204.157 (e533e98b126..., userDataDir: C:\Users\VISHAL~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:65250}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:65250/devtoo..., se:cdpVersion: 138.0.7204.158, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6e774b84deaf6f317d55cdbe993bea0e
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:544)
+at org.openqa.selenium.remote.RemoteWebDriver.executeScript(RemoteWebDriver.java:475)
+at com.briskpe.framework.utils.JavaScriptUtils.executeFlutterPlaceholderJs(JavaScriptUtils.java:29)
+... 25 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.RuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyUserCanNavigateToSideMenuItems -->
+        <test-method is-config="true" signature="tearDownTestWithScreenshot(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:54 IST" name="tearDownTestWithScreenshot" finished-at="2025-07-21T16:44:54 IST" duration-ms="204" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyUserCanNavigateToSideMenuItems status=FAILURE method=DashBoardTest.verifyUserCanNavigateToSideMenuItems()[pri:2, instance:com.briskpe.tests.DashBoardTest@4b8d604b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownTestWithScreenshot -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.briskpe.tests.DashBoardTest@4b8d604b]" started-at="2025-07-21T16:44:54 IST" name="tearDown" finished-at="2025-07-21T16:44:58 IST" duration-ms="4435" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyUserCanNavigateToSideMenuItems status=FAILURE method=DashBoardTest.verifyUserCanNavigateToSideMenuItems()[pri:2, instance:com.briskpe.tests.DashBoardTest@4b8d604b] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.briskpe.tests.DashBoardTest -->
     </test> <!-- Web -->
   </suite> <!-- Briskpe‑Cross‑Platform-Suite -->
 </testng-results>

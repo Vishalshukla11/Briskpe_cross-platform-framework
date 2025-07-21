@@ -21,7 +21,6 @@ public class BaseTest {
     protected static ExtentTest test;
     protected ElementUtils elementUtils;
     protected DashBoard dash;
-    protected JavaScriptUtils js;
 
     @BeforeSuite(alwaysRun = true)
     public void startReport() {
@@ -42,7 +41,6 @@ public class BaseTest {
 
         elementUtils = new ElementUtils(driver);
         dash = new DashBoard();
-        js = new JavaScriptUtils();
 
         test = extent.createTest(method.getName());
 
@@ -84,8 +82,10 @@ public class BaseTest {
         Assert.assertTrue(elementUtils.isElementDisplayed(login.getVerifyButton()), "❌ Verify button not visible");
         login.clickVerifyButton();
 
-        Thread.sleep(5000); // Consider replacing with explicit waits
-        JavaScriptUtils.executeJs();
+        Thread.sleep(5000); // Optional: Replace with explicit wait
+
+        JavaScriptUtils.executeFlutterPlaceholderJs(driver);
+
         test.info("🧭 Waiting for App Tour screen...");
         Assert.assertTrue(dash.isAppTourScreenVisible(), "❌ App Tour screen not visible");
 

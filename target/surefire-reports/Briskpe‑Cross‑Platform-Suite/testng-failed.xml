@@ -9,9 +9,12 @@
     <classes>
       <class name="com.briskpe.tests.LoginTest">
         <methods>
+          <include name="tearDownLoginTest"/>
           <include name="initReport"/>
-          <include name="flushReport"/>
+          <include name="flushLoginReport"/>
           <include name="setUp"/>
+          <include name="startReport"/>
+          <include name="endReport"/>
           <include name="shouldLoginWithValidMobile"/>
           <include name="tearDown"/>
         </methods>
@@ -23,10 +26,13 @@
     <classes>
       <class name="com.briskpe.tests.LoginTest">
         <methods>
+          <include name="tearDownLoginTest"/>
           <include name="initReport"/>
-          <include name="flushReport"/>
-          <include name="shouldLoginWithValidMobile"/>
+          <include name="flushLoginReport"/>
           <include name="setUp"/>
+          <include name="startReport"/>
+          <include name="endReport"/>
+          <include name="shouldLoginWithValidMobile"/>
           <include name="tearDown"/>
         </methods>
       </class> <!-- com.briskpe.tests.LoginTest -->
@@ -35,15 +41,18 @@
   <test thread-count="3" parallel="tests" name="Web(failed)" verbose="0">
     <parameter name="platform" value="WEB"/>
     <classes>
-      <class name="com.briskpe.tests.LoginTest">
+      <class name="com.briskpe.tests.DashBoardTest">
         <methods>
           <include name="initReport"/>
           <include name="flushReport"/>
+          <include name="verifyUserCanNavigateToSideMenuItems"/>
           <include name="setUp"/>
-          <include name="shouldLoginWithValidMobile"/>
+          <include name="startReport"/>
+          <include name="endReport"/>
           <include name="tearDown"/>
+          <include name="tearDownTestWithScreenshot"/>
         </methods>
-      </class> <!-- com.briskpe.tests.LoginTest -->
+      </class> <!-- com.briskpe.tests.DashBoardTest -->
     </classes>
   </test> <!-- Web(failed) -->
 </suite> <!-- Failed suite [Briskpe‑Cross‑Platform-Suite] -->
