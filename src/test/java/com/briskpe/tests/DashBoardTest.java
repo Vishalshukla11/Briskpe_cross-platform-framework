@@ -1,59 +1,14 @@
 package com.briskpe.tests;
 
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.ExtentReports;
-import com.briskpe.framework.core.DriverFactory;
-import com.briskpe.framework.utils.ScreenshotUtils;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.testng.annotations.Test;
 
 public class DashBoardTest extends BaseTest {
 
-    @BeforeSuite
-    public void initReport() {
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String reportPath = System.getProperty("user.dir") + "/reports/DashboardTestReport_" + timestamp + ".html";
-
-        ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-        extent.setSystemInfo("Tester", "Vishal Shukla");
-        extent.setSystemInfo("Environment", "Staging");
-        extent.setSystemInfo("Platform", System.getProperty("platform", "WEB"));
-    }
-
-
     @Test(priority = 1)
-    public void clickSkipButtonTest(){
-        test = extent.createTest("Validate 'Skip' Button on App Tour Screen");
-        try {
-            loginAndSkipAppTour();
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        test.pass("✅ Successfully clicked on 'Skip' button after app tour");
-    }
-
-    @Test(priority = 2)
     public void verifyUserCanNavigateToSideMenuItems() {
-        test = extent.createTest("Validate Navigation to Side Menu Items");
-        try {
-            loginAndSkipAppTour();
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-
         test.info("🔍 Clicking Pending Action...");
         Assert.assertTrue(dash.isPendingActionVisible(), "❌ Pending Action not visible");
-
         dash.clickPendingAction();
         Assert.assertTrue(dash.isPendingActionPageVisible(), "❌ Page did not load");
 
@@ -75,27 +30,76 @@ public class DashBoardTest extends BaseTest {
         test.pass("✅ All side menu navigations successful");
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDownTestWithScreenshot(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            test.fail("❌ Test Failed: " + result.getThrowable());
-            String screenshotPath = ScreenshotUtils.takeScreenshot(result.getMethod().getMethodName());
-            try {
-                test.addScreenCaptureFromPath(screenshotPath);
-            } catch (Exception e) {
-                test.warning("⚠️ Unable to attach screenshot: " + e.getMessage());
-            }
-        } else if (result.getStatus() == ITestResult.SKIP) {
-            test.skip("⚠️ Test Skipped: " + result.getThrowable());
-        } else {
-            test.pass("✅ Test Passed");
-        }
+    @Test(priority = 2)
+    public void verifyNavigationToShareVirtualAccountDetailsThroughQuickActions(){
+        test.info("Clicking Quick Action Drop Down");
+        Assert.assertTrue(dash.isQuickActionButtonVisible(),"❌ Quick Action DropDown Button not visible");
+        dash.ClickQuickActionButton();
+        Assert.assertTrue(dash.isQuickActionOptionVisible("Share Virtual Account Details"),"❌ Quick Action Option not visible");
+        dash.ClickQuickActionOption("Share Virtual Account Details");
+        test.pass("Share Virtual Account Details clicked successfully ");
+
+    }
+    @Test(priority = 3)
+    public void verifyNavigationToCreatePaymentRequestsThroughQuickActions(){
+        test.info("Clicking Quick Action Drop Down");
+        Assert.assertTrue(dash.isQuickActionButtonVisible(),"❌ Quick Action DropDown Button not visible");
+        dash.ClickQuickActionButton();
+        Assert.assertTrue(dash.isQuickActionOptionVisible("Create Payment Request"),"❌ Quick Action Option not visible");
+        dash.ClickQuickActionOptions("Create Payment Request");
+        test.pass("Create Payment Request clicked successfully ");
+        Assert.assertTrue(dash.isCreatePaymentRequestPageVisible(),"❌ Create Payment Request page not visible");
+
+    }
+    @Test(priority = 4)
+    public void verifyNavigationToCreatePaymentLinkThroughQuickActions(){
+        test.info("Clicking Quick Action Drop Down");
+        Assert.assertTrue(dash.isQuickActionButtonVisible(),"❌ Quick Action DropDown Button not visible");
+        dash.ClickQuickActionButton();
+        Assert.assertTrue(dash.isQuickActionOptionVisible("Create Payment Link"),"❌ Quick Action Option not visible");
+        dash.ClickQuickActionOptions("Create Payment Link");
+        test.pass("Create Payment Link clicked successfully ");
+        Assert.assertTrue(dash.isCreatePaymentLinkPageVisible(),"❌ Create Payment Link page not visible");
+
 
     }
 
-    @AfterSuite
-    public void flushReport() {
-        DriverFactory.quitDriver();
-        extent.flush();
+    @Test(priority = 5)
+    public void verifyNavigationToAddPayerThroughQuickActions(){
+        test.info("Clicking Quick Action Drop Down");
+        Assert.assertTrue(dash.isQuickActionButtonVisible(),"❌ Quick Action DropDown Button not visible");
+        dash.ClickQuickActionButton();
+        Assert.assertTrue(dash.isQuickActionOptionVisible("Add Payer"),"❌ Quick Action Option not visible");
+        dash.ClickQuickActionOptions("Add Payer");
+        test.pass("Add Payer clicked successfully ");
+        Assert.assertTrue(dash.isAddPayerPageVisible(),"❌ Add Payer page not visible");
+
     }
+
+    @Test(priority = 6)
+    public void verifyNavigationToCreateInvoiceThroughQuickActions(){
+        test.info("Clicking Quick Action Drop Down");
+        Assert.assertTrue(dash.isQuickActionButtonVisible(),"❌ Quick Action DropDown Button not visible");
+        dash.ClickQuickActionButton();
+        Assert.assertTrue(dash.isQuickActionOptionVisible("Create Invoice"),"❌ Quick Action Option not visible");
+        dash.ClickQuickActionOptions("Create Invoice");
+        test.pass("Create Invoice clicked successfully ");
+        Assert.assertTrue(dash.isCreateInvoicePageVisible(),"❌ Create Invoice page not visible");
+
+    }
+
+    @Test(priority = 7)
+    public void verifyNavigationToDownloadStatementThroughQuickActions(){
+        test.info("Clicking Quick Action Drop Down");
+        Assert.assertTrue(dash.isQuickActionButtonVisible(),"❌ Quick Action DropDown Button not visible");
+        dash.ClickQuickActionButton();
+        Assert.assertTrue(dash.isQuickActionOptionVisible("Download Statement"),"❌ Quick Action Option not visible");
+        dash.ClickQuickActionOptions("Download Statement");
+        test.pass("Download Statement clicked successfully ");
+        Assert.assertTrue(dash.isDownloadStatementPageVisible(),"❌ Download Statement page not visible");
+
+    }
+
+
+
 }

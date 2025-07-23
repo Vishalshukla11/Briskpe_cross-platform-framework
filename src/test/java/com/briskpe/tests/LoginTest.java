@@ -1,32 +1,13 @@
 package com.briskpe.tests;
 
-import com.aventstack.extentreports.*;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.briskpe.framework.core.Config;
-import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.pages.LoginPage;
-import com.briskpe.framework.utils.ElementUtils;
+import com.briskpe.framework.utils.JavaScriptUtils;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 public class LoginTest extends BaseTest {
-
-    @BeforeSuite
-    public void initReport() {
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String reportPath = System.getProperty("user.dir") + "/reports/LoginTestReport_" + timestamp + ".html";
-
-        ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
-        extent = new ExtentReports();
-        extent.attachReporter(sparkReporter);
-
-        extent.setSystemInfo("Tester", Config.get("testerName"));
-        extent.setSystemInfo("Environment", Config.get("environment"));
-        extent.setSystemInfo("Platform", System.getProperty("platform", "WEB"));
-    }
 
     @Test
     public void shouldLoginWithValidMobile() {
@@ -52,32 +33,21 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(elementUtils.isElementDisplayed(loginPage.getVerifyButton()), "❌ Verify button not visible");
         loginPage.clickVerifyButton();
 
-        test.pass("✅ Login completed successfully");
-    }
-
-    @Test
-    public void shouldNotLoginWithInvalidMobileNumber()
-    {
-        test= extent.createTest("Login with inValid Mobile Number ");
-        LoginPage loginPage = new LoginPage();
-
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void tearDownLoginTest(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            test.fail("❌ Test Failed: " + result.getThrowable());
-        } else if (result.getStatus() == ITestResult.SKIP) {
-            test.skip("⚠️ Test Skipped: " + result.getThrowable());
-        } else {
-            test.pass("✅ Test Passed");
+        try{
+            Thread.sleep(5000); // Replace with proper wait
+        }catch (Exception e)
+        {
+            System.out.print(e.getMessage());
         }
 
-        DriverFactory.quitDriver();
-    }
+        JavaScriptUtils.executeFlutterPlaceholderJs(driver);
 
-    @AfterSuite
-    public void flushLoginReport() {
-        extent.flush();
+        test.info("🧭 Waiting for App Tour screen...");
+        Assert.assertTrue(dash.isAppTourScreenVisible(), "❌ App Tour screen not visible");
+
+        test.info("⏭ Skipping App Tour...");
+        Assert.assertTrue(dash.isSkipButtonVisible(), "❌ Skip button not visible");
+        dash.clickSkipButton();
+        test.pass("✅ Login completed successfully");
     }
 }

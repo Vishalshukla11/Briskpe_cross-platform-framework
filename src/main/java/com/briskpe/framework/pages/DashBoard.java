@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import com.briskpe.framework.utils.MouseActionsUtil;
 public class DashBoard {
 
     private final WebDriver driver = DriverFactory.getDriver();
@@ -111,6 +111,65 @@ public class DashBoard {
             case ANDROID, IOS -> AppiumBy.flutterKey("screen_paymentlink_landing");
         };
     }
+    private  By getQuickActionsDropDownLocator(){
+        return  switch (platform)
+        {
+            case WEB, MOBILE_WEB -> By.xpath("(//flt-semantics[@role='button' and contains(@aria-label, 'Quick Actions')]//flt-semantics)[2]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_paymentlink_landing");
+
+        };
+    }
+
+    private By getQuickActionOptionLocator(String optionText) {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath(String.format("//flt-semantics[contains(text(), '%s')]", optionText));
+            case ANDROID, IOS -> AppiumBy.flutterText(optionText);
+        };
+    }
+
+    private By getShareVirtualAccountDetailsPageLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_virtualaccount_list\"]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_virtualaccount_list");
+        };
+    }
+
+    private By getCreatePaymentRequestPageLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(@aria-label,'Create Payment Request') and @flt-semantics-identifier=\"btn_close\" ]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("btn_close");
+        };
+    }
+
+    private By getCreatePaymentLinkPageLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_paymentlink_landing\"]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_paymentlink_landing");
+        };
+    }
+
+    private By getAddPayerPageLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"btn_close\"]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("btn_close");
+        };
+    }
+
+    private By getCreateInvoicePageLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"btn_close\"]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("btn_close");
+        };
+    }
+    private By getDownloadStatementPageLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_reports_screen\"]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_reports_screen");
+        };
+    }
+
+
+
 
     // Visibility Checks
     public boolean isAppTourScreenVisible() {
@@ -156,6 +215,34 @@ public class DashBoard {
     public boolean isPaymentLinkPageVisible() {
         return isElementVisible(getPaymentLinkPageLocator(), "Payment Links");
     }
+    public boolean isQuickActionButtonVisible(){
+        return isElementVisible(getQuickActionsDropDownLocator(),"Quick Action");
+    }
+
+    public boolean isQuickActionOptionVisible(String str) {
+        return isElementVisible(getQuickActionOptionLocator(str), "Quick Action Option");
+    }
+
+    public boolean isShareVirtualAccountPageDetailsVisible() {
+        return isElementVisible(getShareVirtualAccountDetailsPageLocator(), "Share Virtual Account Details");
+    }
+
+    public boolean isCreatePaymentRequestPageVisible() {
+        return isElementVisible(getCreatePaymentRequestPageLocator(), "Create Payment Request");
+    }
+    public boolean isCreatePaymentLinkPageVisible() {
+        return isElementVisible(getCreatePaymentLinkPageLocator(), "Create Payment Link");
+    }
+    public boolean isAddPayerPageVisible() {
+        return isElementVisible(getAddPayerPageLocator(), "Add Payer");
+    }
+    public boolean isCreateInvoicePageVisible() {
+        return isElementVisible(getCreateInvoicePageLocator(), "Create Invoice");
+    }
+    public boolean isDownloadStatementPageVisible() {
+        return isElementVisible(getDownloadStatementPageLocator(), "Download Statement");
+    }
+
 
     // Click Actions
     public void clickSkipButton() {
@@ -184,6 +271,26 @@ public class DashBoard {
 
     public  void WaitTillpendingButtonIsClickble(){
         WaitUtils.waitUntilElementIsClickable(getPendingActionLocator(),20);
+    }
+
+    public void ClickQuickActionButton(){
+        JavaScriptUtils.JsClick(getQuickActionsDropDownLocator(),driver);
+
+    }
+
+    public void ClickQuickActionOption(String str){
+        MouseActionsUtil mouseActionsUtil= new MouseActionsUtil(driver);
+        mouseActionsUtil.moveMouseToElement(getQuickActionOptionLocator(str));
+        mouseActionsUtil.clickAtCurrentCursorPosition();
+
+
+    }
+    public void ClickQuickActionOptions(String str){
+        MouseActionsUtil mouseActionsUtil= new MouseActionsUtil(driver);
+        mouseActionsUtil.moveMouseToElement(getQuickActionOptionLocator(str));
+        mouseActionsUtil.doubleClickAtCurrentCursorPosition();
+
+
     }
 
     // Helper Methods

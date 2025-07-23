@@ -17,7 +17,7 @@ public class LoginPage {
 
     private By loginTab() {
         return switch (platform) {
-            case WEB, ANDROID, IOS, MOBILE_WEB -> By.xpath("//*[@flt-semantics-identifier='mobile_number_entry']");
+            case WEB, ANDROID, IOS, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='mobile_number_entry']");
 
         };
     }
@@ -62,21 +62,30 @@ public class LoginPage {
     public boolean isLoginTabDisplayed() {
         try {
             if (platform == Platform.WEB) {
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                // STEP 1: Wait for a special Flutter placeholder to appear
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
                 WebElement placeholder = wait.until(ExpectedConditions.presenceOfElementLocated(
                         By.cssSelector("#body > flt-semantics-placeholder")
                 ));
+
+                // STEP 2: Click it using JavaScript (some Flutter Web apps require this to trigger rendering)
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", placeholder);
-                Thread.sleep(1000); // Wait for rendering
+
+                // STEP 3: Wait for UI transition
+                Thread.sleep(1000); // crude wait to allow the UI to render
             }
 
+            // STEP 4: Wait for the actual Login Tab to be visible
             WaitUtils.untilVisible(loginTab(), 30);
+
+            // STEP 5: Check and return if it is displayed
             return driver.findElement(loginTab()).isDisplayed();
         } catch (Exception e) {
             System.out.println("[ERROR] Login tab not found on " + platform + ": " + e.getMessage());
             return false;
         }
     }
+
 
     public LoginPage enterMobileNumber(String number) {
         WaitUtils.untilVisible(mobileInput(), 30);

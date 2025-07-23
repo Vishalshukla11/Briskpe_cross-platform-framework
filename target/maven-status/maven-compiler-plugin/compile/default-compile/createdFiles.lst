@@ -4,7 +4,10 @@ com\briskpe\framework\utils\WaitUtils.class
 com\briskpe\framework\pages\DashBoard$1.class
 com\briskpe\framework\utils\ExtentManager.class
 com\briskpe\framework\core\DriverFactory$1.class
+com\briskpe\framework\utils\ExcelUtils$1.class
 com\briskpe\framework\utils\ElementUtils.class
+com\briskpe\framework\utils\ExcelUtils.class
+com\briskpe\framework\utils\MobileNumberUtils.class
 com\briskpe\framework\utils\ScreenshotUtils.class
 com\briskpe\framework\pages\LoginPage$1.class
 com\briskpe\framework\core\Platform.class
