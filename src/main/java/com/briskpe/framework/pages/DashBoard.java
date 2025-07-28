@@ -35,7 +35,7 @@ public class DashBoard {
     }
 
     // Locators
-    private By getAppTourScreenLocator() {
+    public By getAppTourScreenLocator() {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='btn_next_app_guide']");
             case ANDROID, IOS -> AppiumBy.flutterKey("btn_next_app_guide");
@@ -120,6 +120,7 @@ public class DashBoard {
         };
     }
 
+
     private By getQuickActionOptionLocator(String optionText) {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath(String.format("//flt-semantics[contains(text(), '%s')]", optionText));
@@ -168,6 +169,20 @@ public class DashBoard {
         };
     }
 
+    private By getNotificationIconLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(text(),'Show menu')]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_reports_screen");
+        };
+    }
+
+    private By getNotificationTabLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(text(),'Notifications')]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_reports_screen");
+        };
+    }
+
 
 
 
@@ -206,6 +221,14 @@ public class DashBoard {
 
     public boolean isRequestedPaymentPageVisible() {
         return isElementVisible(getRequestedPaymentPageLocator(), "Requested Payments");
+    }
+
+    public boolean isNotificationIconVisible() {
+        return isElementVisible(getNotificationIconLocator(), "Notification Icon");
+    }
+
+    public boolean isNotificationPopupVisible() {
+        return isElementVisible(getNotificationTabLocator(), "Notification popup tab");
     }
 
     public boolean isPaymentLinkVisible() {
@@ -253,20 +276,27 @@ public class DashBoard {
         clickElement(getNextButtonLocator(), "Next");
     }
 
+    public void clickNotificationIcon() {
+       // clickElement(getNotificationIconLocator(),"Get Notification icon clicked ");
+        JavaScriptUtils.jsClick(getNotificationIconLocator(),driver);
+    }
+
+
+
     public void clickPendingAction() {
-        JavaScriptUtils.JsClick(getPendingActionLocator(),driver);
+        JavaScriptUtils.jsClick(getPendingActionLocator(),driver);
     }
 
     public void clickReceivedPayment() {
-        JavaScriptUtils.JsClick(getReceivedLocator(),driver);
+        JavaScriptUtils.jsClick(getReceivedLocator(),driver);
     }
 
     public void clickRequestedPayment() {
-        JavaScriptUtils.JsClick(getRequestedPaymentLocator(),driver);
+        JavaScriptUtils.jsClick(getRequestedPaymentLocator(),driver);
     }
 
     public void clickPaymentLink() {
-        JavaScriptUtils.JsClick(getPaymentLinkLocator(),driver);
+        JavaScriptUtils.jsClick(getPaymentLinkLocator(),driver);
     }
 
     public  void WaitTillpendingButtonIsClickble(){
@@ -274,7 +304,7 @@ public class DashBoard {
     }
 
     public void ClickQuickActionButton(){
-        JavaScriptUtils.JsClick(getQuickActionsDropDownLocator(),driver);
+        JavaScriptUtils.jsClick(getQuickActionsDropDownLocator(),driver);
 
     }
 

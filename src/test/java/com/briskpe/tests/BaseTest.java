@@ -6,6 +6,7 @@ import com.briskpe.framework.core.Config;
 import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.pages.DashBoard;
 import com.briskpe.framework.pages.LoginPage;
+import com.briskpe.framework.pages.UsersProfile;
 import com.briskpe.framework.utils.ElementUtils;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import com.briskpe.framework.utils.ScreenshotUtils;
@@ -89,6 +90,12 @@ public class BaseTest {
         Assert.assertTrue(dash.isSkipButtonVisible(), "❌ Skip button not visible");
         dash.clickSkipButton();
     }
+
+    void openUserProfileMenu(UsersProfile usersProfile) {
+        usersProfile.clickProfileIcon();
+        Assert.assertTrue(usersProfile.isProfileAndSettingButtonVisible(), "Profile and Setting button should be visible");
+    }
+
 
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) {

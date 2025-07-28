@@ -9,6 +9,7 @@
     <classes>
       <class name="com.briskpe.tests.LoginTest"/>
       <class name="com.briskpe.tests.DashBoardTest"/>
+      <class name="com.briskpe.tests.UsersProfileTest"/>
     </classes>
   </test>
 </suite>

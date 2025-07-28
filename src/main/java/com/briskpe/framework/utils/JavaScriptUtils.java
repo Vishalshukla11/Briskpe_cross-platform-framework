@@ -1,132 +1,139 @@
 package com.briskpe.framework.utils;
 
-import com.briskpe.framework.core.Config;
-import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.core.Platform;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
+/**
+ * Utility class for JavaScript-based actions tailored for Flutter Web automation.
+ */
 public class JavaScriptUtils {
 
+    private static final int DEFAULT_WAIT_SECONDS = 15;
+
     /**
-     * Executes Flutter placeholder JS only for WEB platform with active WebDriver session.
+     * Clicks on the Flutter placeholder to trigger UI rendering (for WEB only).
      *
-     * @param driver the WebDriver instance
+     * @param driver WebDriver instance
      */
     public static void executeFlutterPlaceholderJs(WebDriver driver) {
-        try {
-            if (driver == null || ((RemoteWebDriver) driver).getSessionId() == null) {
-                System.out.println("⚠️ Skipping JS execution: WebDriver is null or session is closed.");
-                return;
-            }
+        if (!isWebPlatform(driver)) return;
 
-            Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
-            if (platform == Platform.WEB) {
-                ((JavascriptExecutor) driver)
-                        .executeScript("document.querySelector('#body > flt-semantics-placeholder').click();");
-                System.out.println("✅ JS executed: Flutter placeholder clicked.");
-            } else {
-                System.out.println("⚠️ JS skipped: Platform is not WEB.");
-            }
+        try {
+            WebElement placeholder = driver.findElement(By.cssSelector("#body > flt-semantics-placeholder"));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", placeholder);
+            System.out.println("✅ JS executed: Flutter placeholder clicked.");
+        } catch (NoSuchElementException e) {
+            System.err.println("❌ Placeholder element not found.");
+            throw new RuntimeException("Flutter placeholder not found", e);
         } catch (Exception e) {
-            throw new RuntimeException("❌ Flutter JS execution failed", e);
+            System.err.println("❌ JS execution failed unexpectedly.");
+            throw new RuntimeException("Flutter JS execution failed", e);
         }
     }
 
     /**
-     * Clicks a WebElement using JavaScript (WEB only).
+     * Performs a JavaScript click on the given WebElement (for WEB only).
      *
-     * @param driver  current WebDriver
-     * @param element element to click
+     * @param driver  WebDriver instance
+     * @param element WebElement to be clicked
      */
     public static void clickElementWithJS(WebDriver driver, WebElement element) {
-        Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
-        if (platform == Platform.WEB) {
-            try {
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                js.executeScript("arguments[0].click();", element);
-                System.out.println("✅ JS clicked element successfully");
-            } catch (Exception e) {
-                System.out.println("❌ JS click failed: " + e.getMessage());
-                throw new RuntimeException("Unable to click element using JS", e);
-            }
-        } else {
-            System.out.println("⚠️ JS click skipped: Platform is not WEB");
-        }
-    }
-
-    /**
-     * Execute any custom JS (WEB only).
-     *
-     * @param driver current WebDriver
-     * @param script JS code to run
-     * @return result of the script (if any)
-     */
-    public static Object executeCustomJs(WebDriver driver, String script) {
-        Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
-        if (platform == Platform.WEB) {
-            try {
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                Object result = js.executeScript(script);
-                System.out.println("✅ Custom JS executed: " + script);
-                return result;
-            } catch (Exception e) {
-                System.out.println("❌ Failed to execute custom JS: " + script);
-                throw new RuntimeException("JS execution failed", e);
-            }
-        } else {
-            System.out.println("⚠️ Custom JS execution skipped: Platform is not WEB");
-            return null;
-        }
-    }
-
-    /**
-     * Smart click using JS for WEB or fallback to native click.
-     *
-     * @param locator            element to be clicked
-     * @param elementDescription description for logging
-     */
-    public static void jsClick(By locator, String elementDescription) {
-        WebDriver driver = DriverFactory.getDriver();  // ✅ Added to fix the error
+        if (!isWebPlatform(driver)) return;
 
         try {
-            WaitUtils.untilVisible(locator, 30);
-            WebElement element = driver.findElement(locator);
-            Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
-
-            if (platform == Platform.WEB) {
-                String jsQuery = Config.get("js.Query", "");
-
-                if (!jsQuery.isEmpty()) {
-                    executeFlutterPlaceholderJs(driver);
-                } else {
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-                    System.out.println("✅ JS clicked element: " + elementDescription);
-                }
-            } else {
-                element.click();
-                System.out.println("✅ Native clicked element: " + elementDescription);
-            }
-
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+            System.out.println("✅ JS clicked element successfully.");
         } catch (Exception e) {
-            throw new RuntimeException("❌ Click failed for element: " + elementDescription + " → " + e.getMessage(), e);
+            System.err.println("❌ JS click failed: " + e.getMessage());
+            throw new RuntimeException("Unable to click element using JS", e);
         }
     }
+
     /**
-     * Clicks an element using JavaScript Executor.
-     * Useful when normal Selenium click is intercepted or blocked by overlays.
+     * Executes custom JavaScript (for WEB only).
      *
-     * @param locator By locator of the element
-     * @param driver  WebDriver instance
+     * @param driver WebDriver instance
+     * @param script JavaScript code to execute
+     * @return result of the execution
      */
-    public static void JsClick(By locator, WebDriver driver) {
-        WebElement element = driver.findElement(locator);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    public static Object executeCustomJs(WebDriver driver, String script) {
+        if (!isWebPlatform(driver)) return null;
+
+        try {
+            Object result = ((JavascriptExecutor) driver).executeScript(script);
+            System.out.println("✅ Custom JS executed: " + script);
+            return result;
+        } catch (Exception e) {
+            System.err.println("❌ Failed to execute custom JS: " + script);
+            throw new RuntimeException("JS execution failed", e);
+        }
     }
 
+    /**
+     * Performs JavaScript click using a locator (for WEB only).
+     *
+     * @param locator Locator of the element
+     * @param driver  WebDriver instance
+     */
+    public static void jsClick(By locator, WebDriver driver) {
+        if (!isWebPlatform(driver)) return;
 
+        try {
+            WebElement element = driver.findElement(locator);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+            System.out.println("✅ JS clicked element by locator: " + locator);
+        } catch (Exception e) {
+            System.err.println("❌ JS click failed for locator: " + locator);
+            throw new RuntimeException("Unable to JS click element using locator", e);
+        }
+    }
 
+    /**
+     * Waits for and clicks the Flutter semantics placeholder to trigger rendering (for WEB only).
+     *
+     * @param driver WebDriver instance
+     */
+    public static void triggerFlutterRender(WebDriver driver) {
+        if (!isWebPlatform(driver)) return;
+
+        try {
+            WebElement placeholder = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_SECONDS))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#body > flt-semantics-placeholder")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", placeholder);
+            Thread.sleep(1000);
+            System.out.println("✅ Flutter render triggered via JS click.");
+        } catch (TimeoutException e) {
+            System.err.println("❌ Flutter placeholder not found within timeout.");
+            throw new RuntimeException("Flutter placeholder not visible in time", e);
+        } catch (Exception e) {
+            System.err.println("❌ Unexpected error while triggering Flutter render.");
+            throw new RuntimeException("Flutter render trigger failed", e);
+        }
+    }
+
+    /**
+     * Checks if the platform is WEB and driver/session is valid.
+     *
+     * @param driver WebDriver instance
+     * @return true if valid and platform is WEB
+     */
+    private static boolean isWebPlatform(WebDriver driver) {
+        if (driver == null || ((RemoteWebDriver) driver).getSessionId() == null) {
+            System.err.println("⚠️ Skipping JS: WebDriver is null or session is closed.");
+            return false;
+        }
+
+        Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
+        if (platform != Platform.WEB) {
+            System.out.println("⚠️ Skipping JS: Platform is not WEB.");
+            return false;
+        }
+
+        return true;
+    }
 }

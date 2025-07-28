@@ -100,6 +100,15 @@ public class DashBoardTest extends BaseTest {
 
     }
 
+    @Test(priority = 8)
+    public void verifyNavigateToNotificationCenterpageAfterclickingOnNotificationIcon()
+    {
+        test.info("Clicking Notification Icon");
+        Assert.assertTrue(dash.isNotificationIconVisible(),"❌ Notification icon not visible");
+        dash.clickNotificationIcon();
+        Assert.assertTrue(dash.isNotificationPopupVisible(),"❌ Notification popup not visible");
+    }
+
 
 
 }

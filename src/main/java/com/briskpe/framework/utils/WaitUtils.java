@@ -35,4 +35,28 @@ public class WaitUtils {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
+    /**
+     * Waits until the element located by the given locator is present in the DOM, regardless of visibility.
+     * Useful for Flutter or canvas-based applications where visibility is not always detectable.
+     *
+     * @param locator By locator of the element.
+     * @param timeoutInSeconds Maximum wait time in seconds.
+     * @return WebElement once it is present.
+     */
+    public static WebElement untilPresent(By locator, int timeoutInSeconds) {
+        WebDriver driver = DriverFactory.getDriver();
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+            return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        } catch (Exception e) {
+            System.out.println("❌ Element not present: " + locator + " | " + e.getMessage());
+            return null;
+        }
+    }
+    public static boolean waitForElementVisible(By locator, int timeoutInSeconds) {
+        return untilVisible(locator, timeoutInSeconds);
+    }
+
+
 }
