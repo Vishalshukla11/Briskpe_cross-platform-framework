@@ -1,15 +1,19 @@
 package com.briskpe.framework.pages;
 
+import com.briskpe.framework.base.BasePage;
 import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.core.Platform;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import com.briskpe.framework.utils.MouseActionsUtil;
+import com.briskpe.framework.utils.RandomDataUtils;
 import com.briskpe.framework.utils.WaitUtils;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class UsersProfile {
+
+public class UsersProfile extends BasePage {
 
     private final WebDriver driver = DriverFactory.getDriver();
     private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
@@ -59,6 +63,42 @@ public class UsersProfile {
         };
     }
 
+    private By getVirtualAccountsPageLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_virtualaccount_list\"]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_virtualaccount_list");
+        };
+    }
+
+    private By getManageTeamPageLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_teammember_list\"]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_teammember_list");
+        };
+    }
+
+    private By getAddTeamMemberLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"btn_add_member\"]//flt-semantics");
+            case ANDROID, IOS -> AppiumBy.flutterKey("btn_add_member");
+        };
+    }
+
+    private By getInviteMemberPopupLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(@aria-label,\"Invite Member\")]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("btn_close");
+        };
+    }
+
+    private By getInviteButtonLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"btn_invite\"]//flt-semantics");
+            case ANDROID, IOS -> AppiumBy.flutterKey("btn_invite");
+        };
+    }
+
+
     private By getBusinessProfileLocator() {
         return getMenuItemLocator("Business Profile");
     }
@@ -86,10 +126,39 @@ public class UsersProfile {
     private By getHelpAndSupportLocator() {
         return getMenuItemLocator("Help and Support");
     }
+    private By getFirstNameField(){
+        return getInviteTeamMemberFields("firstName");
+    }
+    private By getMiddleNameField(){
+        return getInviteTeamMemberFields("middleName");
+    }
+    private By getLastNameField(){
+        return getInviteTeamMemberFields("lastName");
+    }
+    private By getEmailField(){
+        return getInviteTeamMemberFields("email");
+    }
+    private By getMobileNumberfield(){
+        return getInviteTeamMemberFields("mobileNumber");
+    }
+    private By getInviteTeamMemberSuccessfullypopupLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//span[contains(text(),'Invite sent on registered email successfully!')]");
+            case ANDROID, IOS -> AppiumBy.flutterKey("screen_virtualaccount_list");
+        };
+    }
 
     private By getMenuItemLocator(String label) {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(@aria-label,'" + label + "')]");
+            case ANDROID, IOS -> AppiumBy.flutterKey(label);
+        };
+    }
+
+
+    private By getInviteTeamMemberFields(String label) {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> By.xpath("//input[contains(@aria-label,'" + label + "')]");
             case ANDROID, IOS -> AppiumBy.flutterKey(label);
         };
     }
@@ -140,6 +209,12 @@ public class UsersProfile {
         clickElement(getReferAndEarnLocator(), "Refer and Earn");
     }
 
+
+
+    public void clickAddTeamMemberButton() {
+        clickElement(getAddTeamMemberLocator(), "Add Team Member Button");
+    }
+
     public void clickAboutBriskpe() {
         clickElement(getAboutBriskpeLocator(), "About BRISKPE");
     }
@@ -150,6 +225,9 @@ public class UsersProfile {
 
     public void clickHelpAndSupport() {
         clickElement(getHelpAndSupportLocator(), "Help and Support");
+    }
+    public void clickAddNewTeamMeberInviteButton() {
+        clickElement(getInviteButtonLocator(), "Invite Button");
     }
 
     // ========== VISIBILITY VERIFICATIONS ========== //
@@ -172,6 +250,9 @@ public class UsersProfile {
     public boolean isProfileScreenVisible() {
         return isElementVisible(getProfileScreenPage(), "Profile Screen");
     }
+    public boolean isAddTeamMemberButtonVisible() {
+        return isElementVisible(getAddTeamMemberLocator(), "Add team Member Button");
+    }
 
     public boolean isBusinessProfileVisible() {
         return isElementVisible(getBusinessProfileLocator(), "Business Profile");
@@ -181,12 +262,27 @@ public class UsersProfile {
         return isElementVisible(getVirtualAccountLocator(), "Virtual Accounts");
     }
 
+
+
+    public boolean isVirtualAccountsPageVisible() {
+        return isElementVisible(getVirtualAccountsPageLocator(), "Virtual Accounts page ");
+    }
+
     public boolean isManageTeamVisible() {
         return isElementVisible(getManageTeamLocator(), "Manage Team");
+    }
+    public boolean isManageTeamMemberPageVisible() {
+        return isElementVisible(getManageTeamPageLocator(), "Manage Team");
+    }
+    public boolean isInviteTeamMemberPopupVisible() {
+        return isElementVisible(getInviteMemberPopupLocator(), "Invite Member popup ");
     }
 
     public boolean isSettlementTimelineVisible() {
         return isElementVisible(getSettlementTimelineLocator(), "Settlement Timelines");
+    }
+    public boolean isInviteTeamMemberSucessfullPopupVisible() {
+        return isElementVisible(getInviteTeamMemberSuccessfullypopupLocator(), "invite team member Successfully popup");
     }
 
     public boolean isReferAndEarnVisible() {
@@ -232,4 +328,37 @@ public class UsersProfile {
             return false;
         }
     }
+    private void enterText(By locator, String text, String fieldName) {
+        try {
+            WaitUtils.untilVisible(locator, 20);
+            WebElement element = driver.findElement(locator);
+            element.clear();
+            element.sendKeys(text);
+            System.out.println("✅ Entered '" + text + "' in " + fieldName);
+        } catch (Exception e) {
+            System.out.println("❌ Failed to enter text in " + fieldName + ": " + e.getMessage());
+        }
+    }
+
+    public void fillInviteTeamMemberFormWithRandomData() {
+        try {
+            String firstName = RandomDataUtils.getRandomFirstName();
+            String middleName = RandomDataUtils.getRandomMiddleName();
+            String lastName = RandomDataUtils.getRandomLastName();
+            String mobile = RandomDataUtils.getRandomMobileNumber();
+            String email = RandomDataUtils.getRandomEmail(mobile);
+
+            enterText(getFirstNameField(), firstName, "First Name");
+            enterText(getMiddleNameField(), middleName, "Middle Name");
+            enterText(getLastNameField(), lastName, "Last Name");
+            enterText(getEmailField(), email, "Email");
+            enterText(getMobileNumberfield(), mobile, "Mobile Number");
+
+            System.out.println("✅ Form filled with random data.");
+        } catch (Exception e) {
+            System.out.println("❌ Failed to fill team member form: " + e.getMessage());
+        }
+    }
+
+
 }

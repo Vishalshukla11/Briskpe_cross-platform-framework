@@ -4,14 +4,13 @@ import com.briskpe.framework.core.Config;
 import com.briskpe.framework.pages.LoginPage;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(priority = 1)
     public void shouldLoginWithValidMobile() {
-        test = extent.createTest("Login Test with Valid Mobile");
+        test.info("🔐 Starting login flow with valid credentials");
 
         LoginPage loginPage = new LoginPage();
         String mobileNumber = Config.get("mobileNo");
@@ -20,24 +19,23 @@ public class LoginTest extends BaseTest {
         test.info("🔹 Checking Login tab visibility");
         Assert.assertTrue(loginPage.isLoginTabDisplayed(), "❌ Login tab not visible");
 
-        test.info("🔹 Entering mobile number: " + mobileNumber);
+        test.info("📱 Entering mobile number: " + mobileNumber);
         loginPage.enterMobileNumber(mobileNumber).tapGetOtp();
 
-        test.info("🔹 Checking OTP screen...");
+        test.info("📲 Verifying OTP screen display");
         Assert.assertTrue(loginPage.isEnterOtpTabDisplayed(), "❌ OTP screen not visible");
 
-        test.info("🔹 Entering OTP: " + otp);
+        test.info("🔐 Entering OTP: " + otp);
         loginPage.enterOTP(otp);
 
-        test.info("🔹 Clicking Verify...");
+        test.info("👉 Clicking Verify button");
         Assert.assertTrue(elementUtils.isElementDisplayed(loginPage.getVerifyButton()), "❌ Verify button not visible");
         loginPage.clickVerifyButton();
 
-        try{
-            Thread.sleep(5000); // Replace with proper wait
-        }catch (Exception e)
-        {
-            System.out.print(e.getMessage());
+        try {
+            Thread.sleep(5000); // Replace with proper wait utility
+        } catch (Exception e) {
+            System.out.println("⚠️ Sleep interrupted: " + e.getMessage());
         }
 
         JavaScriptUtils.executeFlutterPlaceholderJs(driver);
@@ -48,6 +46,7 @@ public class LoginTest extends BaseTest {
         test.info("⏭ Skipping App Tour...");
         Assert.assertTrue(dash.isSkipButtonVisible(), "❌ Skip button not visible");
         dash.clickSkipButton();
-        test.pass("✅ Login completed successfully");
+
+        test.pass("✅ Login completed successfully and user landed on Dashboard");
     }
 }

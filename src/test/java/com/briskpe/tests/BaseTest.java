@@ -9,6 +9,7 @@ import com.briskpe.framework.pages.LoginPage;
 import com.briskpe.framework.pages.UsersProfile;
 import com.briskpe.framework.utils.ElementUtils;
 import com.briskpe.framework.utils.JavaScriptUtils;
+import com.briskpe.framework.utils.ReportCleaner;
 import com.briskpe.framework.utils.ScreenshotUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -17,8 +18,13 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * BaseTest handles driver setup, report initialization,
+ * login flow, and teardown logic for all test classes.
+ */
 public class BaseTest {
 
     protected WebDriver driver;
@@ -27,43 +33,63 @@ public class BaseTest {
     protected ElementUtils elementUtils;
     protected DashBoard dash;
 
+    /**
+     * Runs once before all tests. Cleans previous reports and initializes Extent report.
+     */
     @BeforeSuite(alwaysRun = true)
-    public void initReport() {
+    public void setupSuite() {
+        ReportCleaner.deleteAllReports();
+        initExtentReport();
+    }
+
+    /**
+     * Initializes ExtentReports with timestamped HTML report.
+     */
+    private void initExtentReport() {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String reportPath = System.getProperty("user.dir") + "/reports/DashboardTestReport_" + timestamp + ".html";
 
         ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
         extent = new ExtentReports();
         extent.attachReporter(spark);
+
         extent.setSystemInfo("Tester", "Vishal Shukla");
         extent.setSystemInfo("Environment", "Staging");
         extent.setSystemInfo("Platform", System.getProperty("platform", "WEB"));
     }
 
+    /**
+     * Runs before each test method. Launches browser and performs login if required.
+     */
     @BeforeMethod(alwaysRun = true)
     @Parameters("platform")
     public void setUp(Method method, @Optional("WEB") String platform) throws InterruptedException {
-        // Set platform and launch driver
         System.setProperty("platform", platform);
         DriverFactory.createDriver();
         driver = DriverFactory.getDriver();
         elementUtils = new ElementUtils(driver);
         dash = new DashBoard();
 
-        // Create ExtentTest instance
         test = extent.createTest(method.getName());
 
-        // Navigate to base URL
         if ("WEB".equalsIgnoreCase(platform)) {
             String baseUrl = Config.get("url");
             Assert.assertNotNull(baseUrl, "❌ Base URL is null in config.properties");
             driver.get(baseUrl);
         }
 
-        // ✅ Login and Skip App Tour
-        loginAndSkipAppTour();
+        // Perform login only for tests in group "requiresLogin"
+        Test testAnnotation = method.getAnnotation(Test.class);
+        if (testAnnotation != null &&
+                testAnnotation.groups() != null &&
+                Arrays.asList(testAnnotation.groups()).contains("requiresLogin")) {
+            loginAndSkipAppTour();
+        }
     }
 
+    /**
+     * Handles login and skips the app tour after verifying required elements.
+     */
     public void loginAndSkipAppTour() throws InterruptedException {
         LoginPage login = new LoginPage();
         String mobile = Config.get("mobileNo");
@@ -79,7 +105,7 @@ public class BaseTest {
         Assert.assertTrue(elementUtils.isElementDisplayed(login.getVerifyButton()), "❌ Verify button not visible");
         login.clickVerifyButton();
 
-        Thread.sleep(5000); // Replace with proper wait
+        Thread.sleep(5000); // Replace with explicit wait in production
 
         JavaScriptUtils.executeFlutterPlaceholderJs(driver);
 
@@ -91,12 +117,18 @@ public class BaseTest {
         dash.clickSkipButton();
     }
 
-    void openUserProfileMenu(UsersProfile usersProfile) {
+    /**
+     * Optional utility method to open the user profile menu from any test.
+     */
+    protected void openUserProfileMenu(UsersProfile usersProfile) {
         usersProfile.clickProfileIcon();
-        Assert.assertTrue(usersProfile.isProfileAndSettingButtonVisible(), "Profile and Setting button should be visible");
+        Assert.assertTrue(usersProfile.isProfileAndSettingButtonVisible(),
+                "❌ Profile and Setting button should be visible");
     }
 
-
+    /**
+     * Runs after each test method. Attaches result and screenshot to the report.
+     */
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) {
         try {
@@ -122,6 +154,9 @@ public class BaseTest {
         }
     }
 
+    /**
+     * Flushes the Extent report once the suite finishes.
+     */
     @AfterSuite(alwaysRun = true)
     public void flushReport() {
         extent.flush();
