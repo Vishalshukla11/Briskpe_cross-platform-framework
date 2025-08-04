@@ -23,27 +23,17 @@ public class DriverFactory {
 
     /* ==========================  Public API  ========================== */
 
-    /**
-     * Initializes the driver only if it's not already initialized.
-     */
     public static void initDriver() {
         if (DRIVER.get() == null) {
             createDriver();
         }
     }
 
-    /**
-     * Creates the driver based on platform property or config.
-     */
     public static void createDriver() {
         String raw = System.getProperty("platform", Config.get("platform"));
         createDriver(Platform.fromString(raw));
     }
 
-    /**
-     * Creates driver instance for the specified platform.
-     * @param platform Platform enum (WEB, ANDROID, IOS, MOBILE_WEB)
-     */
     public static void createDriver(Platform platform) {
         try {
             switch (platform) {
@@ -54,21 +44,16 @@ public class DriverFactory {
                 default          -> throw new IllegalStateException("Unhandled platform: " + platform);
             }
             System.out.println("✅ Driver initialized for platform: " + platform);
+            System.out.println("🔧 Appium URL: " + Config.get("appium.url", "http://127.0.0.1:4723"));
         } catch (MalformedURLException e) {
             throw new RuntimeException("❌ Bad Appium server URL", e);
         }
     }
 
-    /**
-     * Gets the current thread's driver.
-     */
     public static WebDriver getDriver() {
         return DRIVER.get();
     }
 
-    /**
-     * Quits the driver and removes it from the thread.
-     */
     public static void quitDriver() {
         WebDriver driver = DRIVER.get();
         if (driver != null) {
@@ -83,11 +68,15 @@ public class DriverFactory {
     private static WebDriver createWebDriver() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
 
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("profile.default_content_setting_values.notifications", 2);
         options.setExperimentalOption("prefs", prefs);
+        options.addArguments("--disable-notifications");
+
+        if (Config.get("headless", "false").equalsIgnoreCase("true")) {
+            options.addArguments("--headless=new");
+        }
 
         WebDriver driver = new org.openqa.selenium.chrome.ChromeDriver(options);
         driver.manage().window().maximize();
@@ -100,9 +89,9 @@ public class DriverFactory {
                 .setAppPackage(Config.get("appPackage"))
                 .setAppActivity(Config.get("appActivity"))
                 .setAutomationName("Flutter")
-                .setPlatformName("Android");
-
-        opts.setNoReset(Boolean.parseBoolean(Config.get("noReset", "true")));
+                .setPlatformName("Android")
+                .amend("newCommandTimeout", 300)
+                .setNoReset(Boolean.parseBoolean(Config.get("noReset", "true")));
 
         return new AndroidDriver(
                 URI.create(Config.get("appium.url", "http://127.0.0.1:4723")).toURL(),
@@ -114,7 +103,9 @@ public class DriverFactory {
         XCUITestOptions opts = new XCUITestOptions()
                 .setDeviceName(Config.get("ios.deviceName"))
                 .setBundleId("com.briskpe.app")
-                .amend("appium:automationName", "Flutter");
+                .setPlatformName("iOS")
+                .setAutomationName("Flutter")
+                .amend("newCommandTimeout", 300);
 
         return new IOSDriver(
                 URI.create(Config.get("appium.url", "http://127.0.0.1:4723")).toURL(),
@@ -122,9 +113,6 @@ public class DriverFactory {
         );
     }
 
-    /**
-     * Creates WebDriver for Mobile Web (Android Chrome / iOS Safari)
-     */
     private static WebDriver createMobileWebDriver() throws MalformedURLException {
         String deviceType = Config.get("mweb.device", "android").toLowerCase();
 
@@ -133,7 +121,8 @@ public class DriverFactory {
                     .setUdid(Config.get("android.udid"))
                     .setPlatformName("Android")
                     .setAutomationName("UiAutomator2")
-                    .amend("browserName", "Chrome");
+                    .amend("browserName", "Chrome")
+                    .amend("newCommandTimeout", 300);
 
             return new AndroidDriver(
                     URI.create(Config.get("appium.url", "http://127.0.0.1:4723")).toURL(),
@@ -145,7 +134,8 @@ public class DriverFactory {
                     .setDeviceName(Config.get("ios.deviceName"))
                     .setPlatformName("iOS")
                     .setAutomationName("XCUITest")
-                    .amend("browserName", "Safari");
+                    .amend("browserName", "Safari")
+                    .amend("newCommandTimeout", 300);
 
             return new IOSDriver(
                     URI.create(Config.get("appium.url", "http://127.0.0.1:4723")).toURL(),
