@@ -1,4 +1,6 @@
 com\briskpe\framework\utils\TestListener.class
+com\briskpe\tests\SignUpTest.class
 com\briskpe\tests\BaseTest.class
-com\briskpe\tests\LoginTest.class
 com\briskpe\tests\DashBoardTest.class
+com\briskpe\tests\LoginTest.class
+com\briskpe\tests\UsersProfileTest.class

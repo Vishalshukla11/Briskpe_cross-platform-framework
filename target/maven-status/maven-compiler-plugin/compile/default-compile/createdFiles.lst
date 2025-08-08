@@ -1,12 +1,17 @@
 com\briskpe\framework\pages\DashBoard.class
 com\briskpe\framework\utils\JavaScriptUtils.class
+com\briskpe\framework\utils\MouseActionsUtil.class
 com\briskpe\framework\utils\WaitUtils.class
 com\briskpe\framework\pages\DashBoard$1.class
+com\briskpe\framework\base\BasePage.class
+com\briskpe\framework\pages\UsersProfile.class
 com\briskpe\framework\utils\ExtentManager.class
 com\briskpe\framework\core\DriverFactory$1.class
-com\briskpe\framework\utils\ExcelUtils$1.class
+com\briskpe\framework\utils\ReportCleaner.class
+com\briskpe\framework\pages\UsersProfile$1.class
 com\briskpe\framework\utils\ElementUtils.class
 com\briskpe\framework\utils\ExcelUtils.class
+com\briskpe\framework\pages\SignUp$1.class
 com\briskpe\framework\utils\MobileNumberUtils.class
 com\briskpe\framework\utils\ScreenshotUtils.class
 com\briskpe\framework\pages\LoginPage$1.class
@@ -14,3 +19,5 @@ com\briskpe\framework\core\Platform.class
 com\briskpe\framework\pages\LoginPage.class
 com\briskpe\framework\core\Config.class
 com\briskpe\framework\core\DriverFactory.class
+com\briskpe\framework\pages\SignUp.class
+com\briskpe\framework\utils\RandomDataUtils.class

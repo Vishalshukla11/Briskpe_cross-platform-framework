@@ -5,188 +5,216 @@ import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.core.Platform;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import com.briskpe.framework.utils.WaitUtils;
+import com.briskpe.framework.utils.MouseActionsUtil;
+
 import io.appium.java_client.AppiumBy;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import com.briskpe.framework.utils.MouseActionsUtil;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Page object representing the DashBoard page for the cross-platform Flutter-based app.
+ * Supports Web, Mobile Web, Android, and iOS using platform-specific locators and actions.
+ */
 public class DashBoard {
+
+    private static final Logger logger = Logger.getLogger(DashBoard.class.getName());
 
     private final WebDriver driver = DriverFactory.getDriver();
     private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
+    private final MouseActionsUtil mouseActionsUtil = new MouseActionsUtil(driver);
 
-    // Execute JS Query only if platform is WEB
+    /**
+     * Execute configured JS query on web platforms only, useful for Flutter web rendering tasks.
+     * Logs execution status and errors.
+     */
     public void executeJsQueryIfWeb() {
-        if (platform == Platform.WEB) {
+        if (platform == Platform.WEB || platform == Platform.MOBILE_WEB) {
+            String jsQuery = Config.get("js.Query");
+            if (jsQuery == null || jsQuery.isEmpty()) {
+                logger.warning("js.Query is empty or not configured.");
+                return;
+            }
             try {
-                String jsQuery = Config.get("js.Query");
-                if (jsQuery != null && !jsQuery.isEmpty()) {
-                    JavascriptExecutor js = (JavascriptExecutor) driver;
-                    js.executeScript(jsQuery);
-                    System.out.println("✅ JS Query executed on Web platform.");
-                } else {
-                    System.out.println("⚠️ js.Query is empty or not configured.");
-                }
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript(jsQuery);
+                logger.info("JS Query executed on Web platform.");
             } catch (Exception e) {
-                System.out.println("❌ Failed to execute JS Query: " + e.getMessage());
+                logger.log(Level.SEVERE, "Failed to execute JS Query: " + e.getMessage(), e);
             }
         }
     }
 
-    // Locators
+    /* ================================ Locator Helpers ================================ */
+
+    private By getFlutterKeyLocator(String key) {
+        return AppiumBy.flutterKey(key);
+    }
+
+    private By getFlutterTextLocator(String text) {
+        return AppiumBy.flutterText(text);
+    }
+
+    private By getWebXPath(String xpath) {
+        return By.xpath(xpath);
+    }
+
+    // Example locator getter with cross-platform switch
+
     public By getAppTourScreenLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='btn_next_app_guide']");
-            case ANDROID, IOS -> AppiumBy.flutterKey("btn_next_app_guide");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier='btn_next_app_guide']");
+            case ANDROID, IOS -> getFlutterKeyLocator("btn_next_app_guide");
         };
     }
 
     private By getNextButtonLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//span[text()='Next'] | //*[text()='Next']");
-            case ANDROID, IOS -> AppiumBy.flutterKey("next_button");
+            case WEB, MOBILE_WEB -> getWebXPath("//span[text()='Next'] | //*[text()='Next']");
+            case ANDROID, IOS -> getFlutterKeyLocator("next_button");
         };
     }
 
     private By getSkipButtonLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//span[contains(text(),'Skip')]/..");
-            case ANDROID, IOS -> AppiumBy.flutterKey("skip_button");
+            case WEB, MOBILE_WEB -> getWebXPath("//span[contains(text(),'Skip')]/..");
+            case ANDROID, IOS -> getFlutterKeyLocator("skip_button");
         };
     }
 
     private By getPendingActionLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='navitem-pending_actions']//span");
-            case ANDROID, IOS -> AppiumBy.flutterKey("navitem-pending_actions");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier='navitem-pending_actions']//span");
+            case ANDROID, IOS -> getFlutterKeyLocator("navitem-pending_actions");
         };
     }
 
     private By getPendingActionPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_pendingaction_list\"]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_pendingaction_list");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier=\"screen_pendingaction_list\"]");
+            case ANDROID, IOS -> getFlutterKeyLocator("screen_pendingaction_list");
         };
     }
 
     private By getReceivedLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='navitem-received_payments']");
-            case ANDROID, IOS -> AppiumBy.flutterKey("navitem-received_payments");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier='navitem-received_payments']");
+            case ANDROID, IOS -> getFlutterKeyLocator("navitem-received_payments");
         };
     }
 
     private By getReceivedPaymentPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='screen_receivedpayment_list']");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_receivedpayment_list");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier='screen_receivedpayment_list']");
+            case ANDROID, IOS -> getFlutterKeyLocator("screen_receivedpayment_list");
         };
     }
 
     private By getRequestedPaymentLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='navitem-requested_payments']");
-            case ANDROID, IOS -> AppiumBy.flutterKey("navitem-requested_payments");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier='navitem-requested_payments']");
+            case ANDROID, IOS -> getFlutterKeyLocator("navitem-requested_payments");
         };
     }
 
     private By getRequestedPaymentPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='screen_paymentrequest_list']");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_paymentrequest_list");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier='screen_paymentrequest_list']");
+            case ANDROID, IOS -> getFlutterKeyLocator("screen_paymentrequest_list");
         };
     }
 
     private By getPaymentLinkLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='navitem-payment_links']");
-            case ANDROID, IOS -> AppiumBy.flutterKey("navitem-payment_links");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier='navitem-payment_links']");
+            case ANDROID, IOS -> getFlutterKeyLocator("navitem-payment_links");
         };
     }
 
     private By getPaymentLinkPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='screen_paymentlink_landing']");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_paymentlink_landing");
-        };
-    }
-    private  By getQuickActionsDropDownLocator(){
-        return  switch (platform)
-        {
-            case WEB, MOBILE_WEB -> By.xpath("(//flt-semantics[@role='button' and contains(@aria-label, 'Quick Actions')]//flt-semantics)[2]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_paymentlink_landing");
-
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier='screen_paymentlink_landing']");
+            case ANDROID, IOS -> getFlutterKeyLocator("screen_paymentlink_landing");
         };
     }
 
+    private By getQuickActionsDropdownLocator() {
+        return switch (platform) {
+            case WEB, MOBILE_WEB -> getWebXPath("(//flt-semantics[@role='button' and contains(@aria-label, 'Quick Actions')]//flt-semantics)[2]");
+            case ANDROID, IOS -> getFlutterKeyLocator("quick_actions_dropdown");  // Fixed key – please verify actual Flutter key
+        };
+    }
 
     private By getQuickActionOptionLocator(String optionText) {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath(String.format("//flt-semantics[contains(text(), '%s')]", optionText));
-            case ANDROID, IOS -> AppiumBy.flutterText(optionText);
+            case WEB, MOBILE_WEB -> getWebXPath(String.format("//flt-semantics[contains(text(), '%s')]", optionText));
+            case ANDROID, IOS -> getFlutterTextLocator(optionText);
         };
     }
 
-    private By getShareVirtualAccountDetailsPageLocator() {
+    private By getShareVirtualAccountPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_virtualaccount_list\"]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_virtualaccount_list");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier=\"screen_virtualaccount_list\"]");
+            case ANDROID, IOS -> getFlutterKeyLocator("screen_virtualaccount_list");
         };
     }
 
     private By getCreatePaymentRequestPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(@aria-label,'Create Payment Request') and @flt-semantics-identifier=\"btn_close\" ]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("btn_close");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[contains(@aria-label,'Create Payment Request') and @flt-semantics-identifier=\"btn_close\"]");
+            case ANDROID, IOS -> getFlutterKeyLocator("btn_close");
         };
     }
 
     private By getCreatePaymentLinkPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_paymentlink_landing\"]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_paymentlink_landing");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier=\"screen_paymentlink_landing\"]");
+            case ANDROID, IOS -> getFlutterKeyLocator("screen_paymentlink_landing");
         };
     }
 
     private By getAddPayerPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"btn_close\"]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("btn_close");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier=\"btn_close\"]");
+            case ANDROID, IOS -> getFlutterKeyLocator("btn_close");
         };
     }
 
     private By getCreateInvoicePageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"btn_close\"]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("btn_close");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier=\"btn_close\"]");
+            case ANDROID, IOS -> getFlutterKeyLocator("btn_close");
         };
     }
+
     private By getDownloadStatementPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_reports_screen\"]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_reports_screen");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[@flt-semantics-identifier=\"screen_reports_screen\"]");
+            case ANDROID, IOS -> getFlutterKeyLocator("screen_reports_screen");
         };
     }
 
     private By getNotificationIconLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(text(),'Show menu')]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_reports_screen");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[contains(text(),'Show menu')]");
+            case ANDROID, IOS -> getFlutterKeyLocator("notification_icon"); // Please verify key correctness
         };
     }
 
     private By getNotificationTabLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(text(),'Notifications')]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("screen_reports_screen");
+            case WEB, MOBILE_WEB -> getWebXPath("//flt-semantics[contains(text(),'Notifications')]");
+            case ANDROID, IOS -> getFlutterKeyLocator("notification_tab"); // Please verify key correctness
         };
     }
 
+    /* ================================ Visibility Checks ================================ */
 
-
-
-    // Visibility Checks
     public boolean isAppTourScreenVisible() {
         return isElementVisible(getAppTourScreenLocator(), "App Tour screen");
     }
@@ -204,7 +232,7 @@ public class DashBoard {
     }
 
     public boolean isPendingActionPageVisible() {
-        return isElementVisible(getPendingActionPageLocator(), "Pending Actions");
+        return isElementVisible(getPendingActionPageLocator(), "Pending Actions Page");
     }
 
     public boolean isReceivedPaymentVisible() {
@@ -212,7 +240,7 @@ public class DashBoard {
     }
 
     public boolean isReceivedPaymentPageVisible() {
-        return isElementVisible(getReceivedPaymentPageLocator(), "Received Payments");
+        return isElementVisible(getReceivedPaymentPageLocator(), "Received Payments Page");
     }
 
     public boolean isRequestedPaymentVisible() {
@@ -220,15 +248,7 @@ public class DashBoard {
     }
 
     public boolean isRequestedPaymentPageVisible() {
-        return isElementVisible(getRequestedPaymentPageLocator(), "Requested Payments");
-    }
-
-    public boolean isNotificationIconVisible() {
-        return isElementVisible(getNotificationIconLocator(), "Notification Icon");
-    }
-
-    public boolean isNotificationPopupVisible() {
-        return isElementVisible(getNotificationTabLocator(), "Notification popup tab");
+        return isElementVisible(getRequestedPaymentPageLocator(), "Requested Payments Page");
     }
 
     public boolean isPaymentLinkVisible() {
@@ -236,38 +256,51 @@ public class DashBoard {
     }
 
     public boolean isPaymentLinkPageVisible() {
-        return isElementVisible(getPaymentLinkPageLocator(), "Payment Links");
-    }
-    public boolean isQuickActionButtonVisible(){
-        return isElementVisible(getQuickActionsDropDownLocator(),"Quick Action");
+        return isElementVisible(getPaymentLinkPageLocator(), "Payment Links Page");
     }
 
-    public boolean isQuickActionOptionVisible(String str) {
-        return isElementVisible(getQuickActionOptionLocator(str), "Quick Action Option");
+    public boolean isQuickActionDropdownVisible() {
+        return isElementVisible(getQuickActionsDropdownLocator(), "Quick Actions Dropdown");
     }
 
-    public boolean isShareVirtualAccountPageDetailsVisible() {
-        return isElementVisible(getShareVirtualAccountDetailsPageLocator(), "Share Virtual Account Details");
+    public boolean isQuickActionOptionVisible(String optionText) {
+        return isElementVisible(getQuickActionOptionLocator(optionText), "Quick Action Option '" + optionText + "'");
+    }
+
+    public boolean isShareVirtualAccountPageVisible() {
+        return isElementVisible(getShareVirtualAccountPageLocator(), "Share Virtual Account Details");
     }
 
     public boolean isCreatePaymentRequestPageVisible() {
         return isElementVisible(getCreatePaymentRequestPageLocator(), "Create Payment Request");
     }
+
     public boolean isCreatePaymentLinkPageVisible() {
         return isElementVisible(getCreatePaymentLinkPageLocator(), "Create Payment Link");
     }
+
     public boolean isAddPayerPageVisible() {
         return isElementVisible(getAddPayerPageLocator(), "Add Payer");
     }
+
     public boolean isCreateInvoicePageVisible() {
         return isElementVisible(getCreateInvoicePageLocator(), "Create Invoice");
     }
+
     public boolean isDownloadStatementPageVisible() {
         return isElementVisible(getDownloadStatementPageLocator(), "Download Statement");
     }
 
+    public boolean isNotificationIconVisible() {
+        return isElementVisible(getNotificationIconLocator(), "Notification Icon");
+    }
 
-    // Click Actions
+    public boolean isNotificationPopupVisible() {
+        return isElementVisible(getNotificationTabLocator(), "Notification Popup Tab");
+    }
+
+    /* ================================ Click Actions ================================ */
+
     public void clickSkipButton() {
         clickElement(getSkipButtonLocator(), "Skip");
     }
@@ -277,72 +310,98 @@ public class DashBoard {
     }
 
     public void clickNotificationIcon() {
-       // clickElement(getNotificationIconLocator(),"Get Notification icon clicked ");
-        JavaScriptUtils.jsClick(getNotificationIconLocator(),driver);
+        JavaScriptUtils.jsClick(getNotificationIconLocator(), driver);
+        logger.info("Clicked Notification Icon using JS click.");
     }
 
-
-
     public void clickPendingAction() {
-        JavaScriptUtils.jsClick(getPendingActionLocator(),driver);
+        JavaScriptUtils.jsClick(getPendingActionLocator(), driver);
+        logger.info("Clicked Pending Action using JS click.");
     }
 
     public void clickReceivedPayment() {
-        JavaScriptUtils.jsClick(getReceivedLocator(),driver);
+        JavaScriptUtils.jsClick(getReceivedLocator(), driver);
+        logger.info("Clicked Received Payment using JS click.");
     }
 
     public void clickRequestedPayment() {
-        JavaScriptUtils.jsClick(getRequestedPaymentLocator(),driver);
+        JavaScriptUtils.jsClick(getRequestedPaymentLocator(), driver);
+        logger.info("Clicked Requested Payment using JS click.");
     }
 
     public void clickPaymentLink() {
-        JavaScriptUtils.jsClick(getPaymentLinkLocator(),driver);
+        JavaScriptUtils.jsClick(getPaymentLinkLocator(), driver);
+        logger.info("Clicked Payment Link using JS click.");
     }
 
-    public  void WaitTillpendingButtonIsClickble(){
-        WaitUtils.waitUntilElementIsClickable(getPendingActionLocator(),20);
+    /**
+     * Waits until the pending action button is clickable, with 20 seconds timeout.
+     */
+    public void waitUntilPendingActionClickable() {
+        WaitUtils.untilClickable(getPendingActionLocator(), 20);
+        logger.info("Waited for Pending Action button to become clickable.");
     }
 
-    public void ClickQuickActionButton(){
-        JavaScriptUtils.jsClick(getQuickActionsDropDownLocator(),driver);
-
+    public void clickQuickActionDropdown() {
+        JavaScriptUtils.jsClick(getQuickActionsDropdownLocator(), driver);
+        logger.info("Clicked Quick Actions Dropdown using JS click.");
     }
 
-    public void ClickQuickActionOption(String str){
-        MouseActionsUtil mouseActionsUtil= new MouseActionsUtil(driver);
-        mouseActionsUtil.moveMouseToElement(getQuickActionOptionLocator(str));
-        mouseActionsUtil.clickAtCurrentCursorPosition();
-
-
-    }
-    public void ClickQuickActionOptions(String str){
-        MouseActionsUtil mouseActionsUtil= new MouseActionsUtil(driver);
-        mouseActionsUtil.moveMouseToElement(getQuickActionOptionLocator(str));
-        mouseActionsUtil.doubleClickAtCurrentCursorPosition();
-
-
+    public void clickQuickActionOption(String optionText) {
+        try {
+            mouseActionsUtil.moveMouseToElement(getQuickActionOptionLocator(optionText));
+            mouseActionsUtil.clickAtCurrentCursorPosition();
+            logger.info("Clicked Quick Action Option: " + optionText);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to click Quick Action Option '" + optionText + "': " + e.getMessage(), e);
+            throw e;
+        }
     }
 
-    // Helper Methods
-    public boolean isElementVisible(By locator, String elementName) {
+    public void doubleClickQuickActionOption(String optionText) {
+        try {
+            mouseActionsUtil.moveMouseToElement(getQuickActionOptionLocator(optionText));
+            mouseActionsUtil.doubleClickAtCurrentCursorPosition();
+            logger.info("Double-clicked Quick Action Option: " + optionText);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to double-click Quick Action Option '" + optionText + "': " + e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    /* ================================ Helper Methods ================================ */
+
+    /**
+     * Helper method to check if an element is visible with wait and detailed logging.
+     * @param locator By locator of the element
+     * @param elementName Logical name of the element for logs
+     * @return true if visible; false otherwise
+     */
+    private boolean isElementVisible(By locator, String elementName) {
         try {
             WaitUtils.untilVisible(locator, 30);
             boolean visible = driver.findElement(locator).isDisplayed();
-            System.out.println("✅ " + elementName + " is visible");
+            logger.info(elementName + " is visible.");
             return visible;
         } catch (Exception e) {
-            System.out.println("❌ " + elementName + " not visible: " + e.getMessage());
+            logger.log(Level.WARNING, elementName + " not visible: " + e.getMessage(), e);
             return false;
         }
     }
 
-    public void clickElement(By locator, String elementName) {
+    /**
+     * Helper method to click an element with logging and exception handling.
+     * @param locator By locator of the element
+     * @param elementName Logical name of the element for logs
+     */
+    private void clickElement(By locator, String elementName) {
         try {
             WebElement element = driver.findElement(locator);
             element.click();
-            System.out.println("✅ Clicked on " + elementName + " button");
+            logger.info("Clicked on " + elementName + " button.");
         } catch (Exception e) {
-            System.out.println("❌ Failed to click " + elementName + " button: " + e.getMessage());
+            logger.log(Level.SEVERE, "Failed to click " + elementName + " button: " + e.getMessage(), e);
+            throw new RuntimeException("Failed to click " + elementName, e);
         }
     }
 }

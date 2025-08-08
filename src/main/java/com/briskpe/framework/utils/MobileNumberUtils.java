@@ -1,36 +1,57 @@
 package com.briskpe.framework.utils;
 
-import com.briskpe.framework.core.Config;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Properties;
 import java.util.Random;
 
+/**
+ * Utility class to generate valid and invalid mobile numbers following defined digit rules.
+ * Valid mobile numbers start with digits 5-9.
+ * Invalid mobile numbers start with digits 0-4.
+ */
 public class MobileNumberUtils {
 
+    private static final Random random = new Random();
+    private static final int MOBILE_NUMBER_LENGTH = 10;
+
+    private static final int VALID_FIRST_DIGIT_MIN = 5;
+    private static final int VALID_FIRST_DIGIT_MAX = 9;
+
+    private static final int INVALID_FIRST_DIGIT_MIN = 0;
+    private static final int INVALID_FIRST_DIGIT_MAX = 4;
+
+    /**
+     * Generates a valid 10-digit mobile number starting with digits 5-9.
+     *
+     * @return generated valid mobile number as string
+     */
     public static String generateValidMobileNumber() {
-        Random random = new Random();
-        int firstDigit = 5 + random.nextInt(5); // 5 to 9
-        StringBuilder mobileNumber = new StringBuilder(String.valueOf(firstDigit));
-        for (int i = 0; i < 9; i++) {
-            mobileNumber.append(random.nextInt(10));
-        }
-        String validNumber = mobileNumber.toString();
-        Config.set("valid.mobile", validNumber);
-        return validNumber;
+        String mobileNumber = generateMobileNumberInRange(VALID_FIRST_DIGIT_MIN, VALID_FIRST_DIGIT_MAX);
+        return mobileNumber;
     }
 
+    /**
+     * Generates an invalid 10-digit mobile number starting with digits 0-4.
+     *
+     * @return generated invalid mobile number as string
+     */
     public static String generateInvalidMobileNumber() {
-        Random random = new Random();
-        int firstDigit = random.nextInt(5); // 0 to 4
-        StringBuilder mobileNumber = new StringBuilder(String.valueOf(firstDigit));
-        for (int i = 0; i < 9; i++) {
+        String mobileNumber = generateMobileNumberInRange(INVALID_FIRST_DIGIT_MIN, INVALID_FIRST_DIGIT_MAX);
+        return mobileNumber;
+    }
+
+    /**
+     * Internal helper to generate a mobile number with the first digit in the specified inclusive range.
+     *
+     * @param digitMin minimum digit for the first digit inclusive
+     * @param digitMax maximum digit for the first digit inclusive
+     * @return generated mobile number as string
+     */
+    private static String generateMobileNumberInRange(int digitMin, int digitMax) {
+        int firstDigit = digitMin + random.nextInt(digitMax - digitMin + 1);
+        StringBuilder mobileNumber = new StringBuilder();
+        mobileNumber.append(firstDigit);
+        for (int i = 1; i < MOBILE_NUMBER_LENGTH; i++) {
             mobileNumber.append(random.nextInt(10));
         }
-        String invalidNumber = mobileNumber.toString();
-        Config.set("invalid.mobile", invalidNumber);
-        return invalidNumber;
+        return mobileNumber.toString();
     }
 }

@@ -11,6 +11,7 @@ import com.briskpe.framework.utils.ElementUtils;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import com.briskpe.framework.utils.ReportCleaner;
 import com.briskpe.framework.utils.ScreenshotUtils;
+import com.briskpe.framework.utils.WaitUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -20,34 +21,45 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * BaseTest handles driver setup, report initialization,
- * login flow, and teardown logic for all test classes.
+ * BaseTest handles driver setup, test initialization,
+ * login flow, and teardown with ExtentReports integration,
+ * supporting cross-platform and cross-browser testing.
  */
 public class BaseTest {
 
     protected WebDriver driver;
-    protected static ExtentReports extent;
-    protected static ExtentTest test;
     protected ElementUtils elementUtils;
     protected DashBoard dash;
 
+    private static ExtentReports extent;
+    private static final ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+    private static final Logger logger = Logger.getLogger(BaseTest.class.getName());
+
+    protected ExtentTest getTest() {
+        return extentTest.get();
+    }
+
     /**
-     * Runs once before all tests. Cleans previous reports and initializes Extent report.
+     * Runs once before all tests. Cleans reports and initializes Extent report.
      */
     @BeforeSuite(alwaysRun = true)
     public void setupSuite() {
+        logger.info("Cleaning previous reports...");
         ReportCleaner.deleteAllReports();
         initExtentReport();
     }
 
     /**
-     * Initializes ExtentReports with timestamped HTML report.
+     * Initializes ExtentReports with a timestamped HTML report.
      */
     private void initExtentReport() {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String reportPath = System.getProperty("user.dir") + "/reports/DashboardTestReport_" + timestamp + ".html";
+        String reportDir = System.getProperty("user.dir") + "/reports";
+        String reportPath = reportDir + "/DashboardTestReport_" + timestamp + ".html";
 
         ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
         extent = new ExtentReports();
@@ -56,29 +68,58 @@ public class BaseTest {
         extent.setSystemInfo("Tester", "Vishal Shukla");
         extent.setSystemInfo("Environment", "Staging");
         extent.setSystemInfo("Platform", System.getProperty("platform", "WEB"));
+
+        logger.info("Extent Report initialized at: " + reportPath);
     }
 
     /**
-     * Runs before each test method. Launches browser and performs login if required.
+     * Setup before each test method. Initializes driver and performs login if required.
+     *
+     * @param method   Current test method
+     * @param platform Platform parameter (default: WEB)
+     * @param browser  Browser parameter (default: chrome)
+     * @param deviceName Device name/UDID for mobile (optional)
      */
     @BeforeMethod(alwaysRun = true)
-    @Parameters("platform")
-    public void setUp(Method method, @Optional("WEB") String platform) throws InterruptedException {
+    @Parameters({"platform", "browser", "deviceName"})
+    public void setUp(Method method,
+                      @Optional("WEB") String platform,
+                      @Optional("chrome") String browser,
+                      @Optional("") String deviceName) {
+        // Set system properties for DriverFactory usage
         System.setProperty("platform", platform);
-        DriverFactory.createDriver();
-        driver = DriverFactory.getDriver();
+        System.setProperty("browser", browser);
+        if (!deviceName.isEmpty()) {
+            System.setProperty("android.udid", deviceName);
+            System.setProperty("ios.deviceName", deviceName);
+        }
+
+        try {
+            DriverFactory.createDriver(platform, browser, deviceName);
+            driver = DriverFactory.getDriver();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Driver initialization failed", e);
+            Assert.fail("Driver initialization failed: " + e.getMessage());
+        }
+
         elementUtils = new ElementUtils(driver);
         dash = new DashBoard();
 
-        test = extent.createTest(method.getName());
+        // Create a unique ExtentTest instance for this thread/test
+        ExtentTest test = extent.createTest(method.getName());
+        extentTest.set(test);
 
+        logger.info(String.format("Starting test: %s on platform: %s, browser: %s, device: %s",
+                method.getName(), platform, browser, deviceName));
+
+        // For WEB tests, navigate to base URL
         if ("WEB".equalsIgnoreCase(platform)) {
             String baseUrl = Config.get("url");
             Assert.assertNotNull(baseUrl, "❌ Base URL is null in config.properties");
             driver.get(baseUrl);
         }
 
-        // Perform login only for tests in group "requiresLogin"
+        // Perform login only if test belongs to "requiresLogin" group
         Test testAnnotation = method.getAnnotation(Test.class);
         if (testAnnotation != null &&
                 testAnnotation.groups() != null &&
@@ -88,37 +129,46 @@ public class BaseTest {
     }
 
     /**
-     * Handles login and skips the app tour after verifying required elements.
+     * Performs login and skips app tour if displayed.
      */
-    public void loginAndSkipAppTour() throws InterruptedException {
-        LoginPage login = new LoginPage();
-        String mobile = Config.get("mobileNo");
-        String otp = Config.get("OTP");
+    public void loginAndSkipAppTour() {
+        try {
+            LoginPage login = new LoginPage();
+            String mobile = Config.get("mobileNo");
+            String otp = Config.get("OTP");
 
-        test.info("🔐 Logging in using mobile number...");
-        Assert.assertTrue(login.isLoginTabDisplayed(), "❌ Login tab not displayed");
-        login.enterMobileNumber(mobile).tapGetOtp();
+            extentTest.get().info("🔐 Logging in using mobile number...");
+            logger.info("Verifying login tab visibility...");
+            Assert.assertTrue(login.isLoginTabDisplayed(), "❌ Login tab not displayed");
+            login.enterMobileNumber(mobile).tapGetOtp();
 
-        test.info("📲 Entering OTP...");
-        Assert.assertTrue(login.isEnterOtpTabDisplayed(), "❌ OTP screen not visible");
-        login.enterOTP(otp);
-        Assert.assertTrue(elementUtils.isElementDisplayed(login.getVerifyButton()), "❌ Verify button not visible");
-        login.clickVerifyButton();
+            extentTest.get().info("📲 Entering OTP...");
+            Assert.assertTrue(login.isEnterOtpTabDisplayed(), "❌ OTP screen not visible");
+            login.enterOTP(otp);
+            Assert.assertTrue(elementUtils.isElementDisplayed(login.getVerifyButton()), "❌ Verify button not visible");
+            login.clickVerifyButton();
 
-        Thread.sleep(5000); // Replace with explicit wait in production
+            logger.info("Waiting for App Tour screen to load...");
+            WaitUtils.untilVisible(dash.getAppTourScreenLocator(), 30);
 
-        JavaScriptUtils.executeFlutterPlaceholderJs(driver);
+            JavaScriptUtils.executeFlutterPlaceholderJs(driver);
 
-        test.info("🧭 Waiting for App Tour screen...");
-        Assert.assertTrue(dash.isAppTourScreenVisible(), "❌ App Tour screen not visible");
+            extentTest.get().info("🧭 Waiting for App Tour screen...");
+            Assert.assertTrue(dash.isAppTourScreenVisible(), "❌ App Tour screen not visible");
 
-        test.info("⏭ Skipping App Tour...");
-        Assert.assertTrue(dash.isSkipButtonVisible(), "❌ Skip button not visible");
-        dash.clickSkipButton();
+            extentTest.get().info("⏭ Skipping App Tour...");
+            Assert.assertTrue(dash.isSkipButtonVisible(), "❌ Skip button not visible");
+            dash.clickSkipButton();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Login and App Tour skipping failed: ", e);
+            Assert.fail("Login and App Tour skipping failed: " + e.getMessage(), e);
+        }
     }
 
     /**
-     * Optional utility method to open the user profile menu from any test.
+     * Utility method to open user profile menu.
+     *
+     * @param usersProfile UsersProfile page object instance
      */
     protected void openUserProfileMenu(UsersProfile usersProfile) {
         usersProfile.clickProfileIcon();
@@ -127,38 +177,56 @@ public class BaseTest {
     }
 
     /**
-     * Runs after each test method. Attaches result and screenshot to the report.
+     * After each test, logs result, attaches screenshots, and quits driver.
+     *
+     * @param result Test result info
      */
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) {
         try {
+            ExtentTest test = extentTest.get();
+
             switch (result.getStatus()) {
                 case ITestResult.FAILURE:
-                    test.fail("❌ Test Failed: " + result.getThrowable());
+                    test.fail("❌ Test Failed: ");
                     String screenshotPath = ScreenshotUtils.takeScreenshot(result.getMethod().getMethodName());
-                    test.addScreenCaptureFromPath(screenshotPath);
+                    if (screenshotPath != null) {
+                        test.addScreenCaptureFromPath(screenshotPath);
+                    }
+                    logger.warning("Test failed: " + result.getMethod().getMethodName() + ". Screenshot captured.");
                     break;
 
                 case ITestResult.SKIP:
                     test.skip("⚠️ Test Skipped: " + result.getThrowable());
+                    logger.info("Test skipped: " + result.getMethod().getMethodName());
                     break;
 
                 case ITestResult.SUCCESS:
                     test.pass("✅ Test Passed");
+                    logger.info("Test passed: " + result.getMethod().getMethodName());
+                    break;
+
+                default:
+                    logger.info("Test with unknown status: " + result.getMethod().getMethodName());
                     break;
             }
         } catch (Exception e) {
-            System.out.println("⚠️ Error attaching screenshot: " + e.getMessage());
+            logger.log(Level.WARNING, "Error attaching screenshot or logging test result: ", e);
         } finally {
             DriverFactory.quitDriver();
+            extentTest.remove(); // Clean up ThreadLocal
+            logger.info("Driver quit and ThreadLocal cleared.");
         }
     }
 
     /**
-     * Flushes the Extent report once the suite finishes.
+     * Flushes Extent reports after all tests finish.
      */
     @AfterSuite(alwaysRun = true)
     public void flushReport() {
-        extent.flush();
+        if (extent != null) {
+            extent.flush();
+            logger.info("Extent report flushed.");
+        }
     }
 }

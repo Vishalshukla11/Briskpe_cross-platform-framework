@@ -12,8 +12,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UsersProfile extends BasePage {
+
+    private static final Logger logger = Logger.getLogger(UsersProfile.class.getName());
 
     private final WebDriver driver = DriverFactory.getDriver();
     private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
@@ -41,7 +45,6 @@ public class UsersProfile extends BasePage {
         };
     }
 
-
     private By getProfileAndSettingButtonLocator() {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(text(),'Profile and Settings')]");
@@ -65,39 +68,38 @@ public class UsersProfile extends BasePage {
 
     private By getVirtualAccountsPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_virtualaccount_list\"]");
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='screen_virtualaccount_list']");
             case ANDROID, IOS -> AppiumBy.flutterKey("screen_virtualaccount_list");
         };
     }
 
     private By getManageTeamPageLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"screen_teammember_list\"]");
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='screen_teammember_list']");
             case ANDROID, IOS -> AppiumBy.flutterKey("screen_teammember_list");
         };
     }
 
     private By getAddTeamMemberLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"btn_add_member\"]//flt-semantics");
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='btn_add_member']//flt-semantics");
             case ANDROID, IOS -> AppiumBy.flutterKey("btn_add_member");
         };
     }
 
     private By getInviteMemberPopupLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(@aria-label,\"Invite Member\")]");
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(@aria-label,'Invite Member')]");
             case ANDROID, IOS -> AppiumBy.flutterKey("btn_close");
         };
     }
 
     private By getInviteButtonLocator() {
         return switch (platform) {
-            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier=\"btn_invite\"]//flt-semantics");
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='btn_invite']//flt-semantics");
             case ANDROID, IOS -> AppiumBy.flutterKey("btn_invite");
         };
     }
-
 
     private By getBusinessProfileLocator() {
         return getMenuItemLocator("Business Profile");
@@ -126,22 +128,28 @@ public class UsersProfile extends BasePage {
     private By getHelpAndSupportLocator() {
         return getMenuItemLocator("Help and Support");
     }
-    private By getFirstNameField(){
-        return getInviteTeamMemberFields("firstName");
+
+    private By getFirstNameField() {
+        return getInviteTeamMemberField("firstName");
     }
-    private By getMiddleNameField(){
-        return getInviteTeamMemberFields("middleName");
+
+    private By getMiddleNameField() {
+        return getInviteTeamMemberField("middleName");
     }
-    private By getLastNameField(){
-        return getInviteTeamMemberFields("lastName");
+
+    private By getLastNameField() {
+        return getInviteTeamMemberField("lastName");
     }
-    private By getEmailField(){
-        return getInviteTeamMemberFields("email");
+
+    private By getEmailField() {
+        return getInviteTeamMemberField("email");
     }
-    private By getMobileNumberfield(){
-        return getInviteTeamMemberFields("mobileNumber");
+
+    private By getMobileNumberField() {
+        return getInviteTeamMemberField("mobileNumber");
     }
-    private By getInviteTeamMemberSuccessfullypopupLocator() {
+
+    private By getInviteTeamMemberSuccessfullyPopupLocator() {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath("//span[contains(text(),'Invite sent on registered email successfully!')]");
             case ANDROID, IOS -> AppiumBy.flutterKey("screen_virtualaccount_list");
@@ -155,8 +163,7 @@ public class UsersProfile extends BasePage {
         };
     }
 
-
-    private By getInviteTeamMemberFields(String label) {
+    private By getInviteTeamMemberField(String label) {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath("//input[contains(@aria-label,'" + label + "')]");
             case ANDROID, IOS -> AppiumBy.flutterKey(label);
@@ -180,11 +187,12 @@ public class UsersProfile extends BasePage {
                 mouseActionsUtil.moveMouseToElement(getProfileAndSettingButtonLocator());
                 mouseActionsUtil.doubleClickAtCurrentCursorPosition();
             } else {
-                clickElement(getProfileAndSettingButtonLocator(), "Profile and Setting Button");
+                clickElement(getProfileAndSettingButtonLocator(), "Profile and Settings Button");
             }
+            logger.info("Clicked Profile and Settings button successfully.");
             return true;
         } catch (Exception e) {
-            System.out.println("❌ Failed to click Profile And Setting Button: " + e.getMessage());
+            logger.log(Level.SEVERE, "Failed to click Profile And Setting Button: " + e.getMessage(), e);
             return false;
         }
     }
@@ -209,8 +217,6 @@ public class UsersProfile extends BasePage {
         clickElement(getReferAndEarnLocator(), "Refer and Earn");
     }
 
-
-
     public void clickAddTeamMemberButton() {
         clickElement(getAddTeamMemberLocator(), "Add Team Member Button");
     }
@@ -226,7 +232,8 @@ public class UsersProfile extends BasePage {
     public void clickHelpAndSupport() {
         clickElement(getHelpAndSupportLocator(), "Help and Support");
     }
-    public void clickAddNewTeamMeberInviteButton() {
+
+    public void clickAddNewTeamMemberInviteButton() {
         clickElement(getInviteButtonLocator(), "Invite Button");
     }
 
@@ -239,19 +246,21 @@ public class UsersProfile extends BasePage {
     public boolean isProfileLogoutButtonVisible() {
         return isElementVisible(getProfileLogOutButtonLocator(), "Logout Button");
     }
+
     public boolean isInsideProfileLogoutButtonVisible() {
-        return isElementVisible(getInsideProfileLogOutButtonLocator(), "inside Profile Logout Button");
+        return isElementVisible(getInsideProfileLogOutButtonLocator(), "Inside Profile Logout Button");
     }
 
     public boolean isProfileAndSettingButtonVisible() {
-        return isElementVisible(getProfileAndSettingButtonLocator(), "Profile and Setting Button");
+        return isElementVisible(getProfileAndSettingButtonLocator(), "Profile and Settings Button");
     }
 
     public boolean isProfileScreenVisible() {
         return isElementVisible(getProfileScreenPage(), "Profile Screen");
     }
+
     public boolean isAddTeamMemberButtonVisible() {
-        return isElementVisible(getAddTeamMemberLocator(), "Add team Member Button");
+        return isElementVisible(getAddTeamMemberLocator(), "Add Team Member Button");
     }
 
     public boolean isBusinessProfileVisible() {
@@ -262,27 +271,28 @@ public class UsersProfile extends BasePage {
         return isElementVisible(getVirtualAccountLocator(), "Virtual Accounts");
     }
 
-
-
     public boolean isVirtualAccountsPageVisible() {
-        return isElementVisible(getVirtualAccountsPageLocator(), "Virtual Accounts page ");
+        return isElementVisible(getVirtualAccountsPageLocator(), "Virtual Accounts Page");
     }
 
     public boolean isManageTeamVisible() {
         return isElementVisible(getManageTeamLocator(), "Manage Team");
     }
+
     public boolean isManageTeamMemberPageVisible() {
-        return isElementVisible(getManageTeamPageLocator(), "Manage Team");
+        return isElementVisible(getManageTeamPageLocator(), "Manage Team Member Page");
     }
+
     public boolean isInviteTeamMemberPopupVisible() {
-        return isElementVisible(getInviteMemberPopupLocator(), "Invite Member popup ");
+        return isElementVisible(getInviteMemberPopupLocator(), "Invite Member Popup");
     }
 
     public boolean isSettlementTimelineVisible() {
         return isElementVisible(getSettlementTimelineLocator(), "Settlement Timelines");
     }
-    public boolean isInviteTeamMemberSucessfullPopupVisible() {
-        return isElementVisible(getInviteTeamMemberSuccessfullypopupLocator(), "invite team member Successfully popup");
+
+    public boolean isInviteTeamMemberSuccessfulPopupVisible() {
+        return isElementVisible(getInviteTeamMemberSuccessfullyPopupLocator(), "Invite Team Member Successful Popup");
     }
 
     public boolean isReferAndEarnVisible() {
@@ -311,9 +321,9 @@ public class UsersProfile extends BasePage {
             } else {
                 driver.findElement(locator).click();
             }
-            System.out.println("✅ " + elementName + " clicked");
+            logger.info(elementName + " clicked successfully.");
         } catch (Exception e) {
-            System.out.println("❌ Failed to click " + elementName + ": " + e.getMessage());
+            logger.log(Level.SEVERE, "Failed to click " + elementName + ": " + e.getMessage(), e);
         }
     }
 
@@ -321,22 +331,23 @@ public class UsersProfile extends BasePage {
         try {
             WaitUtils.untilVisible(locator, 30);
             boolean visible = driver.findElement(locator).isDisplayed();
-            System.out.println("✅ " + elementName + " is visible");
-            return true;
+            logger.info(elementName + " is visible.");
+            return visible;
         } catch (Exception e) {
-            System.out.println("❌ " + elementName + " not visible: " + e.getMessage());
+            logger.log(Level.WARNING, elementName + " not visible: " + e.getMessage(), e);
             return false;
         }
     }
+
     private void enterText(By locator, String text, String fieldName) {
         try {
             WaitUtils.untilVisible(locator, 20);
             WebElement element = driver.findElement(locator);
             element.clear();
             element.sendKeys(text);
-            System.out.println("✅ Entered '" + text + "' in " + fieldName);
+            logger.info("Entered '" + text + "' into " + fieldName);
         } catch (Exception e) {
-            System.out.println("❌ Failed to enter text in " + fieldName + ": " + e.getMessage());
+            logger.log(Level.SEVERE, "Failed to enter text in " + fieldName + ": " + e.getMessage(), e);
         }
     }
 
@@ -352,13 +363,11 @@ public class UsersProfile extends BasePage {
             enterText(getMiddleNameField(), middleName, "Middle Name");
             enterText(getLastNameField(), lastName, "Last Name");
             enterText(getEmailField(), email, "Email");
-            enterText(getMobileNumberfield(), mobile, "Mobile Number");
+            enterText(getMobileNumberField(), mobile, "Mobile Number");
 
-            System.out.println("✅ Form filled with random data.");
+            logger.info("Invite Team Member form filled with random data.");
         } catch (Exception e) {
-            System.out.println("❌ Failed to fill team member form: " + e.getMessage());
+            logger.log(Level.SEVERE, "Failed to fill team member form: " + e.getMessage(), e);
         }
     }
-
-
 }

@@ -7,11 +7,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Utility class for JavaScript-based actions tailored for Flutter Web automation.
+ * Ensures actions run only on Web platform, leveraging JavaScript execution for Flutter-specific rendering challenges.
  */
 public class JavaScriptUtils {
+
+    private static final Logger logger = Logger.getLogger(JavaScriptUtils.class.getName());
 
     private static final int DEFAULT_WAIT_SECONDS = 15;
 
@@ -26,12 +31,12 @@ public class JavaScriptUtils {
         try {
             WebElement placeholder = driver.findElement(By.cssSelector("#body > flt-semantics-placeholder"));
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", placeholder);
-            System.out.println("✅ JS executed: Flutter placeholder clicked.");
+            logger.info("JS executed: Flutter placeholder clicked.");
         } catch (NoSuchElementException e) {
-            System.err.println("❌ Placeholder element not found.");
+            logger.log(Level.SEVERE, "Placeholder element not found.", e);
             throw new RuntimeException("Flutter placeholder not found", e);
         } catch (Exception e) {
-            System.err.println("❌ JS execution failed unexpectedly.");
+            logger.log(Level.SEVERE, "JS execution failed unexpectedly.", e);
             throw new RuntimeException("Flutter JS execution failed", e);
         }
     }
@@ -47,9 +52,9 @@ public class JavaScriptUtils {
 
         try {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-            System.out.println("✅ JS clicked element successfully.");
+            logger.info("JS clicked element successfully.");
         } catch (Exception e) {
-            System.err.println("❌ JS click failed: " + e.getMessage());
+            logger.log(Level.SEVERE, "JS click failed: " + e.getMessage(), e);
             throw new RuntimeException("Unable to click element using JS", e);
         }
     }
@@ -59,17 +64,17 @@ public class JavaScriptUtils {
      *
      * @param driver WebDriver instance
      * @param script JavaScript code to execute
-     * @return result of the execution
+     * @return result of the execution, or null if not on WEB platform
      */
     public static Object executeCustomJs(WebDriver driver, String script) {
         if (!isWebPlatform(driver)) return null;
 
         try {
             Object result = ((JavascriptExecutor) driver).executeScript(script);
-            System.out.println("✅ Custom JS executed: " + script);
+            logger.info("Custom JS executed: " + script);
             return result;
         } catch (Exception e) {
-            System.err.println("❌ Failed to execute custom JS: " + script);
+            logger.log(Level.SEVERE, "Failed to execute custom JS: " + script, e);
             throw new RuntimeException("JS execution failed", e);
         }
     }
@@ -86,9 +91,9 @@ public class JavaScriptUtils {
         try {
             WebElement element = driver.findElement(locator);
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-            System.out.println("✅ JS clicked element by locator: " + locator);
+            logger.info("JS clicked element by locator: " + locator);
         } catch (Exception e) {
-            System.err.println("❌ JS click failed for locator: " + locator);
+            logger.log(Level.SEVERE, "JS click failed for locator: " + locator, e);
             throw new RuntimeException("Unable to JS click element using locator", e);
         }
     }
@@ -102,16 +107,20 @@ public class JavaScriptUtils {
         if (!isWebPlatform(driver)) return;
 
         try {
-            WebElement placeholder = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_SECONDS))
-                    .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#body > flt-semantics-placeholder")));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_SECONDS));
+            WebElement placeholder = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#body > flt-semantics-placeholder")));
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", placeholder);
-            Thread.sleep(1000);
-            System.out.println("✅ Flutter render triggered via JS click.");
+            Thread.sleep(1000); // Allow UI rendering time
+            logger.info("Flutter render triggered via JS click.");
         } catch (TimeoutException e) {
-            System.err.println("❌ Flutter placeholder not found within timeout.");
+            logger.log(Level.SEVERE, "Flutter placeholder not found within timeout.", e);
             throw new RuntimeException("Flutter placeholder not visible in time", e);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            logger.log(Level.WARNING, "Interrupted while waiting for Flutter render trigger.", e);
+            throw new RuntimeException("Interrupted during Flutter render trigger wait", e);
         } catch (Exception e) {
-            System.err.println("❌ Unexpected error while triggering Flutter render.");
+            logger.log(Level.SEVERE, "Unexpected error while triggering Flutter render.", e);
             throw new RuntimeException("Flutter render trigger failed", e);
         }
     }
@@ -123,14 +132,23 @@ public class JavaScriptUtils {
      * @return true if valid and platform is WEB
      */
     private static boolean isWebPlatform(WebDriver driver) {
-        if (driver == null || ((RemoteWebDriver) driver).getSessionId() == null) {
-            System.err.println("⚠️ Skipping JS: WebDriver is null or session is closed.");
+        if (driver == null) {
+            logger.warning("Skipping JS: WebDriver is null.");
+            return false;
+        }
+        if (!(driver instanceof RemoteWebDriver)) {
+            logger.warning("Skipping JS: WebDriver is not a RemoteWebDriver instance.");
+            return false;
+        }
+        RemoteWebDriver remoteDriver = (RemoteWebDriver) driver;
+        if (remoteDriver.getSessionId() == null) {
+            logger.warning("Skipping JS: WebDriver session is null or closed.");
             return false;
         }
 
         Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
         if (platform != Platform.WEB) {
-            System.out.println("⚠️ Skipping JS: Platform is not WEB.");
+            logger.info("Skipping JS: Platform is not WEB.");
             return false;
         }
 

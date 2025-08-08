@@ -3,43 +3,57 @@ package com.briskpe.tests;
 import com.briskpe.framework.pages.UsersProfile;
 import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * Test class for validating User Profile related features.
+ */
 public class UsersProfileTest extends BaseTest {
+
+    private UsersProfile usersProfile;
+
+    @BeforeMethod(alwaysRun = true)
+    public void setup() {
+        // Initialize UsersProfile page object before each test
+        usersProfile = new UsersProfile();
+    }
+
+    /**
+     * Common helper to open profile settings menu.
+     */
+    private void openProfileSettings() {
+        getTest().info("👤 Opening user profile menu...");
+        openUserProfileMenu(usersProfile);
+        getTest().info("📂 Clicking 'Profile & Setting' button...");
+        Assert.assertTrue(usersProfile.clickProfileAndSettingButton(), "❌ Failed to click Profile & Setting");
+    }
 
     @Test(priority = 1, groups = "requiresLogin")
     @Description("Verify that clicking the profile icon reveals Profile & Setting and Logout buttons.")
     public void verifyProfileAndLogoutButtonsVisibility() {
-        test = extent.createTest("Verify Profile & Logout Buttons are Visible");
+        getTest().info("Verify Profile & Logout Buttons are Visible");
 
-        UsersProfile usersProfile = new UsersProfile();
-
-        test.info("👤 Clicking profile icon...");
+        getTest().info("👤 Clicking profile icon...");
         usersProfile.clickProfileIcon();
 
-        test.info("🔍 Verifying 'Profile & Setting' button visibility...");
+        getTest().info("🔍 Verifying 'Profile & Setting' button visibility...");
         Assert.assertTrue(usersProfile.isProfileAndSettingButtonVisible(), "❌ Profile & Setting button not visible");
 
-        test.info("🔍 Verifying 'Logout' button visibility...");
+        getTest().info("🔍 Verifying 'Logout' button visibility...");
         Assert.assertTrue(usersProfile.isProfileLogoutButtonVisible(), "❌ Logout button not visible");
 
-        test.pass("✅ Profile & Setting and Logout buttons are visible");
+        getTest().pass("✅ Profile & Setting and Logout buttons are visible");
     }
 
     @Test(priority = 2, groups = "requiresLogin")
     @Description("Verify all user profile menu items are visible after opening the profile settings.")
     public void verifyUserProfileMenuItemsVisibility() {
-        test = extent.createTest("Verify User Profile Menu Items");
+        getTest().info("Verify User Profile Menu Items");
 
-        UsersProfile usersProfile = new UsersProfile();
+        openProfileSettings();
 
-        test.info("👤 Opening user profile menu...");
-        openUserProfileMenu(usersProfile); // ✅ Reused utility method from BaseTest
-
-        test.info("📂 Clicking 'Profile & Setting' button...");
-        Assert.assertTrue(usersProfile.clickProfileAndSettingButton(), "❌ Failed to click Profile & Setting");
-
-        test.info("🔍 Verifying all profile menu items...");
+        getTest().info("🔍 Verifying all profile menu items...");
         Assert.assertTrue(usersProfile.isProfileScreenVisible(), "❌ Profile screen not visible");
         Assert.assertTrue(usersProfile.isBusinessProfileVisible(), "❌ Business Profile not visible");
         Assert.assertTrue(usersProfile.isVirtualAccountsVisible(), "❌ Virtual Accounts not visible");
@@ -51,70 +65,66 @@ public class UsersProfileTest extends BaseTest {
         Assert.assertTrue(usersProfile.isHelpAndSupportVisible(), "❌ Help & Support not visible");
         Assert.assertTrue(usersProfile.isInsideProfileLogoutButtonVisible(), "❌ Logout inside profile not visible");
 
-        test.pass("✅ All user profile menu items are visible");
+        getTest().pass("✅ All user profile menu items are visible");
     }
 
     @Test(priority = 3, groups = "requiresLogin")
     @Description("Verify that user is able to log out successfully from the profile menu.")
     public void verifyLogoutFunctionality() {
-        test = extent.createTest("Verify Logout Functionality");
+        getTest().info("Verify Logout Functionality");
 
-        UsersProfile usersProfile = new UsersProfile();
-
-        test.info("👤 Clicking on profile icon...");
+        getTest().info("👤 Clicking on profile icon...");
         usersProfile.clickProfileIcon();
 
-        test.info("🚪 Clicking 'Logout' button...");
+        getTest().info("🚪 Clicking 'Logout' button...");
         usersProfile.clickLogoutButton();
 
-        test.pass("✅ Logout action executed successfully");
+        getTest().pass("✅ Logout action executed successfully");
     }
 
-    @Test(priority = 3, groups = "requiresLogin")
-    @Description("Verify that user is able to Navigate to Virtual Accounts page successfully from the profile menu.")
-    public void navigateTOVirtualAccountsPage()
-    { test = extent.createTest("Verify Virtual Accounts Navigation Functionality");
+    @Test(priority = 4, groups = "requiresLogin")
+    @Description("Verify that user can navigate to Virtual Accounts page successfully from the profile menu.")
+    public void verifyNavigationToVirtualAccountsPage() {
+        getTest().info("Verify Virtual Accounts Navigation Functionality");
 
-        UsersProfile usersProfile = new UsersProfile();
-        test.info("👤 Opening user profile menu...");
-        openUserProfileMenu(usersProfile); // ✅ Reused utility method from BaseTest
-        test.info("📂 Clicking 'Profile & Setting' button...");
-        Assert.assertTrue(usersProfile.clickProfileAndSettingButton(), "❌ Failed to click Profile & Setting");
-        test.info("clicking on Virtual Accounts Button");
+        openProfileSettings();
+
+        getTest().info("📂 Clicking 'Virtual Accounts' button...");
         usersProfile.clickVirtualAccounts();
-        test.pass("Clicked successsfully on Virtual Accounts Button ");
-        Assert.assertTrue(usersProfile.isVirtualAccountsPageVisible(),"❌ Virtual Account page not visible ");
-        test.pass("Virtual Account Page visible successfully ");
+
+        getTest().pass("✅ Clicked successfully on Virtual Accounts button");
+        Assert.assertTrue(usersProfile.isVirtualAccountsPageVisible(), "❌ Virtual Accounts page not visible");
+        getTest().pass("✅ Virtual Accounts page is visible");
     }
 
-    @Test(priority = 3, groups = "requiresLogin")
-    @Description("Verify that user is able to Create Team member successfully from the profile menu.")
-    public void createTeamMember()
-    { test = extent.createTest("Verify that user is able to Create Team member successfully from the profile menu.");
+    @Test(priority = 5, groups = "requiresLogin")
+    @Description("Verify that user is able to create team member successfully from the profile menu.")
+    public void verifyCreateTeamMemberFunctionality() {
+        getTest().info("Verify Create Team Member Functionality");
 
-        UsersProfile usersProfile = new UsersProfile();
-        test.info("👤 Opening user profile menu...");
-        openUserProfileMenu(usersProfile); // ✅ Reused utility method from BaseTest
-        test.info("📂 Clicking 'Profile & Setting' button...");
-        Assert.assertTrue(usersProfile.clickProfileAndSettingButton(), "❌ Failed to click Profile & Setting");
-        test.info("clicking on manage Team Button");
+        openProfileSettings();
+
+        getTest().info("📂 Clicking 'Manage Team' button...");
         usersProfile.clickManageTeam();
-        test.pass("Clicked successsfully on Manage Team  Button ");
-        Assert.assertTrue(usersProfile.isManageTeamMemberPageVisible(),"❌Manage Team page not visible ");
-        Assert.assertTrue(usersProfile.isAddTeamMemberButtonVisible(), "❌ Add team member Button not Visible");
+        getTest().pass("✅ Clicked successfully on Manage Team button");
+
+        Assert.assertTrue(usersProfile.isManageTeamMemberPageVisible(), "❌ Manage Team page not visible");
+        Assert.assertTrue(usersProfile.isAddTeamMemberButtonVisible(), "❌ Add team member button not visible");
+
         usersProfile.clickAddTeamMemberButton();
-        test.pass("✅ add team member Button clicked ");
-        Assert.assertTrue(usersProfile.isInviteTeamMemberPopupVisible(),"❌ Invite Team member Popup not displayed");
-        test.pass("✅ invite team member Popup Displayed");
+        getTest().pass("✅ Add Team Member button clicked");
 
-        test.info("Enter Details Into Invite team member fields ");
+        Assert.assertTrue(usersProfile.isInviteTeamMemberPopupVisible(), "❌ Invite Team Member popup not displayed");
+        getTest().pass("✅ Invite Team Member popup displayed");
+
+        getTest().info("✍️ Entering details into Invite Team Member fields");
         usersProfile.fillInviteTeamMemberFormWithRandomData();
-        test.pass("✅ Details Filled successfully");
-        usersProfile.clickAddNewTeamMeberInviteButton();
-        test.pass("✅ Invite member button clicked ");
-        Assert.assertTrue(usersProfile.isInviteTeamMemberSucessfullPopupVisible(),"❌ successfully  Invite Team member Popup not displayed");
-        test.pass("✅ Team member Invites successfully");
+        getTest().pass("✅ Details filled successfully");
 
+        usersProfile.clickAddNewTeamMemberInviteButton();
+        getTest().pass("✅ Invite member button clicked");
+
+        Assert.assertTrue(usersProfile.isInviteTeamMemberSuccessfulPopupVisible(), "❌ Invite Team Member success popup not displayed");
+        getTest().pass("✅ Team Member invited successfully");
     }
-
 }

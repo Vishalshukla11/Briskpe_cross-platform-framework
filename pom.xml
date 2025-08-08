@@ -14,28 +14,28 @@
   </properties>
   <dependencies>
 
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+    <!-- Selenium Java -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>4.34.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+    <!-- Appium Java Client -->
     <dependency>
       <groupId>io.appium</groupId>
       <artifactId>java-client</artifactId>
       <version>9.5.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+    <!-- WebDriverManager -->
     <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
       <version>6.1.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <!-- TestNG -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
@@ -43,50 +43,48 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
+    <!-- Allure TestNG -->
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
       <version>2.29.1</version>
     </dependency>
 
-  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-  <dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.19.1</version>
-  </dependency>
+    <!-- Jackson Databind -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.19.1</version>
+    </dependency>
 
-  <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-  <dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-simple</artifactId>
-    <version>2.0.17</version>
-    <scope>test</scope>
-  </dependency>
+    <!-- SLF4J Simple Logger -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.17</version>
+      <scope>test</scope>
+    </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.38</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+    <!-- ExtentReports -->
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports</artifactId>
       <version>5.1.2</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+    <!-- Apache POI for Excel -->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi</artifactId>
       <version>5.4.1</version>
     </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
@@ -103,7 +101,7 @@
         <version>3.5.3</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile>
+            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>
