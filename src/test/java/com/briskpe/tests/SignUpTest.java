@@ -14,13 +14,18 @@ import org.testng.annotations.Test;
 @Slf4j
 public class SignUpTest extends BaseTest {
 
-   public void completeManualOnbaording()
-   {
-       LoginPage loginPage = new LoginPage();
-       String mobileNumber = Config.get("mobileNo");
-     
-       
+    @Test(priority = 1)
+    public void shouldLoginWithValidMobile() {
+        getTest().info("🔐 Starting login flow with valid credentials");
 
-   }
+        LoginPage loginPage = new LoginPage();
+        String mobileNumber = Config.get("mobileNo");
+        String otp = Config.get("OTP");
+
+        getTest().info("🔹 Checking Login tab visibility");
+        Assert.assertTrue(loginPage.isLoginTabDisplayed(), "❌ Login tab not visible");
+
+    }
+
 
 }

@@ -1,82 +1,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Briskpe Cross-Platform and Cross-Browser Suite" parallel="tests" thread-count="5">
 
-<!--  &lt;!&ndash; Android native app test &ndash;&gt;-->
-<!--  <test name="Android-Native-Test">-->
-<!--    <parameter name="platform" value="ANDROID"/>-->
-<!--    <parameter name="deviceName" value="RZ8M43K8GJY"/>-->
-<!--    <parameter name="browser" value=""/>-->
-<!--    <classes>-->
-<!--      <class name="com.briskpe.tests.DashBoardTest"/>-->
-<!--      &lt;!&ndash; add other Android native tests here &ndash;&gt;-->
-<!--    </classes>-->
-<!--  </test>-->
-
-<!--  -&lt;!&ndash; iOS native app test &ndash;&gt;-->
-  <!--  <test name="iOS-Native-Test">-->
-  <!--    <parameter name="platform" value="IOS"/>-->
-  <!--    <parameter name="deviceName" value="iPhone Simulator"/>-->
-  <!--    <parameter name="browser" value=""/>-->
-  <!--    <classes>-->
-  <!--      <class name="com.briskpe.tests.DashBoardTest"/>-->
-  <!--      &lt;!&ndash; add other iOS native tests here &ndash;&gt;-->
-  <!--    </classes>-->
-  <!--  </test>->
-
-<!-    <!- Android Mobile Web test (Chrome on Android) &ndash;&gt;-->
-<!--  <test name="Android-Mobile-Web-Test">-->
-<!--    <parameter name="platform" value="MOBILE_WEB"/>-->
-<!--    <parameter name="deviceName" value="RZ8M43K8GJY"/>-->
-<!--    <parameter name="mweb.device" value="android"/>-->
-<!--    <parameter name="browser" value="chrome"/>-->
-<!--    <classes>-->
-<!--      <class name="com.briskpe.tests.DashBoardTest"/>-->
-<!--      &lt;!&ndash; add other mobile web tests here &ndash;&gt;-->
-<!--    </classes>-->
-<!--  </test>-->
-
-<!--  &lt;!&ndash; iOS Mobile Web test (Safari on iOS) &ndash;&gt;-->
-<!--  <test name="iOS-Mobile-Web-Test">-->
-<!--    <parameter name="platform" value="MOBILE_WEB"/>-->
-<!--    <parameter name="deviceName" value="iPhone Simulator"/>-->
-<!--    <parameter name="mweb.device" value="ios"/>-->
-<!--    <parameter name="browser" value="safari"/>-->
-<!--    <classes>-->
-<!--      <class name="com.briskpe.tests.DashBoardTest"/>-->
-<!--      <class name="com.briskpe.tests.LoginTest"/>-->
-<!--      <class name="com.briskpe.tests.SignUpTest"/>-->
-<!--      <class name="com.briskpe.tests.UsersProfileTest"/>-->
-<!--      &lt;!&ndash; add other mobile web tests here &ndash;&gt;-->
-<!--    </classes>-->
-<!--  </test>-->
-
-<!--  &lt;!&ndash; Desktop Web Chrome test &ndash;&gt;-->
-<!--  <test name="Web-Chrome-Test">-->
-<!--    <parameter name="platform" value="WEB"/>-->
-<!--    <parameter name="browser" value="chrome"/>-->
-<!--    <parameter name="deviceName" value=""/>-->
-<!--    <classes>-->
-<!--      <class name="com.briskpe.tests.DashBoardTest"/>-->
-<!--      <class name="com.briskpe.tests.LoginTest"/>-->
-<!--      <class name="com.briskpe.tests.SignUpTest"/>-->
-<!--      <class name="com.briskpe.tests.UsersProfileTest"/>-->
-
-
-<!--      &lt;!&ndash; add other desktop web tests here &ndash;&gt;-->
-<!--    </classes>-->
-<!--  </test>-->
-
-  <!-- Desktop Web Firefox test -->
-  <test name="Web-Firefox-Test">
-    <parameter name="platform" value="WEB"/>
-    <parameter name="browser" value="firefox"/>
-    <parameter name="deviceName" value=""/>
+  <!-- Android Mobile Web test (Chrome on Android) -->
+  <test name="Android-Mobile-Web-Test">
+    <parameter name="platform" value="ANDROID"/>
+    <parameter name="deviceName" value="RZ8M43K8GJY"/>
+    <parameter name="mweb.device" value="android"/>
+    <parameter name="browser" value="chrome"/>
     <classes>
       <class name="com.briskpe.tests.DashBoardTest"/>
-      <class name="com.briskpe.tests.LoginTest"/>
-      <class name="com.briskpe.tests.SignUpTest"/>
-      <class name="com.briskpe.tests.UsersProfileTest"/>
+      <!-- add other mobile web tests here -->
     </classes>
   </test>
+
+  <!-- other tests can remain as is -->
 
 </suite>

@@ -33,14 +33,14 @@ public class LoginPage {
     private By mobileInput() {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.cssSelector("input[aria-label^='mobileNumber']");
-            case ANDROID, IOS -> By.xpath("//*[@key='mobileNumberField']");
+            case ANDROID, IOS -> By.xpath("//android.widget.EditText");
         };
     }
 
     private By getOtpButton() {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[normalize-space(text())='Get OTP']");
-            case ANDROID, IOS -> By.xpath("//*[@key='getOtpBtn']");
+            case ANDROID, IOS -> By.xpath("//android.widget.Button[@content-desc=\"Get OTP\"]");
         };
     }
 
