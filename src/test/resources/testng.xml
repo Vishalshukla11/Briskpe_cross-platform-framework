@@ -1,18 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Briskpe Cross-Platform and Cross-Browser Suite" parallel="tests" thread-count="5">
+<suite name="Android Suite" verbose="1" parallel="none">
+  <parameter name="platform" value="ANDROID"/>
+  <parameter name="browser" value=""/> <!-- empty if testing native app -->
+  <parameter name="deviceName" value="RZ8M43K8GJY"/> <!-- or your real device udid -->
 
-  <!-- Android Mobile Web test (Chrome on Android) -->
-  <test name="Android-Mobile-Web-Test">
-    <parameter name="platform" value="ANDROID"/>
-    <parameter name="deviceName" value="RZ8M43K8GJY"/>
-    <parameter name="mweb.device" value="android"/>
-    <parameter name="browser" value="chrome"/>
+  <test name="Dashboard Tests on Android">
     <classes>
-      <class name="com.briskpe.tests.DashBoardTest"/>
-      <!-- add other mobile web tests here -->
+<!--      <class name="com.briskpe.tests.DashBoardTest"/>-->
+          <class name="com.briskpe.tests.SignUpTest"/>
+
     </classes>
   </test>
-
-  <!-- other tests can remain as is -->
-
 </suite>

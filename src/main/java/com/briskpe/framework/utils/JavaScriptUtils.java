@@ -66,18 +66,22 @@ public class JavaScriptUtils {
      * @param script JavaScript code to execute
      * @return result of the execution, or null if not on WEB platform
      */
-    public static Object executeCustomJs(WebDriver driver, String script) {
-        if (!isWebPlatform(driver)) return null;
-
+    public static void executeCustomJs(WebDriver driver, String script) {
+        if (!isWebPlatform(driver)) {
+            logger.warning("JS execution skipped - not running on WEB platform.");
+            return;
+        }
         try {
-            Object result = ((JavascriptExecutor) driver).executeScript(script);
-            logger.info("Custom JS executed: " + script);
-            return result;
+            logger.info("Executing custom JS: " + script);
+            ((JavascriptExecutor) driver).executeScript(script);
+            Thread.sleep(1000); // Allow Flutter DOM to update
+            logger.info("Custom JS executed successfully.");
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to execute custom JS: " + script, e);
+            logger.log(Level.SEVERE, "JS execution failed: " + script, e);
             throw new RuntimeException("JS execution failed", e);
         }
     }
+
 
     /**
      * Performs JavaScript click using a locator (for WEB only).

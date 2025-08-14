@@ -13,16 +13,10 @@ import java.util.logging.Logger;
 public class ExcelUtils {
 
     private static final Logger logger = Logger.getLogger(ExcelUtils.class.getName());
-
     private static final String EXCEL_PATH = "src/test/resources/BriskPeTestDataWeb.xlsx";
 
     /**
      * Reads the value of a single cell.
-     *
-     * @param sheetName sheet name
-     * @param rowNum    zero-based row index
-     * @param colNum    zero-based column index
-     * @return cell value as String
      */
     public static String readCell(String sheetName, int rowNum, int colNum) {
         try (FileInputStream fis = new FileInputStream(EXCEL_PATH);
@@ -43,11 +37,6 @@ public class ExcelUtils {
 
     /**
      * Writes a string value to a specified cell.
-     *
-     * @param sheetName sheet name
-     * @param rowNum    zero-based row index
-     * @param colNum    zero-based column index
-     * @param value     string value to write
      */
     public static void writeCell(String sheetName, int rowNum, int colNum, String value) {
         try (FileInputStream fis = new FileInputStream(EXCEL_PATH);
@@ -62,7 +51,6 @@ public class ExcelUtils {
 
             cell.setCellValue(value);
 
-            // Write changes back to the Excel file
             try (FileOutputStream fos = new FileOutputStream(EXCEL_PATH)) {
                 workbook.write(fos);
             }
@@ -74,11 +62,7 @@ public class ExcelUtils {
     }
 
     /**
-     * Reads an entire row as a Map where keys are column headers and values are the corresponding cell values.
-     *
-     * @param sheetName sheet name
-     * @param rowNum    zero-based row index (excluding header row which is 0)
-     * @return map of header->value pairs
+     * Reads an entire row as a Map where keys are column headers and values are corresponding cell values.
      */
     public static Map<String, String> readRowAsMap(String sheetName, int rowNum) {
         Map<String, String> data = new HashMap<>();
@@ -106,24 +90,66 @@ public class ExcelUtils {
     }
 
     /**
-     * Retrieves the cell value as a String handling different cell types.
-     *
-     * @param cell Excel cell
-     * @return string representation of the cell value
+     * Fetches value by looking up a key in one column and returning the related value from another column.
+     */
+    public static String getValueByKey(String sheetName, String keyColumnName, String keyValue, String valueColumnName) {
+        try (FileInputStream fis = new FileInputStream(EXCEL_PATH);
+             Workbook workbook = new XSSFWorkbook(fis)) {
+
+            Sheet sheet = workbook.getSheet(sheetName);
+            if (sheet == null) throw new RuntimeException("Sheet '" + sheetName + "' not found");
+
+            DataFormatter formatter = new DataFormatter();
+
+            // Find column indexes from header row
+            Row headerRow = sheet.getRow(0);
+            int keyColIndex = -1;
+            int valueColIndex = -1;
+
+            for (Cell cell : headerRow) {
+                String columnName = formatter.formatCellValue(cell).trim();
+                if (columnName.equalsIgnoreCase(keyColumnName)) {
+                    keyColIndex = cell.getColumnIndex();
+                }
+                if (columnName.equalsIgnoreCase(valueColumnName)) {
+                    valueColIndex = cell.getColumnIndex();
+                }
+            }
+
+            if (keyColIndex == -1 || valueColIndex == -1) {
+                throw new RuntimeException("Column not found: " + keyColumnName + " or " + valueColumnName);
+            }
+
+            // Search rows for the matching key
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if (row != null) {
+                    String currentKey = formatter.formatCellValue(row.getCell(keyColIndex)).trim();
+                    if (currentKey.equalsIgnoreCase(keyValue)) {
+                        return formatter.formatCellValue(row.getCell(valueColIndex)).trim();
+                    }
+                }
+            }
+
+            return null; // key not found
+
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Failed to read value by key from Excel", e);
+            throw new RuntimeException("❌ Failed to read by key", e);
+        }
+    }
+
+    /**
+     * Retrieves the cell value as a String, handling different cell types.
      */
     private static String getCellValue(Cell cell) {
         if (cell == null) return "";
-        // Using DataFormatter for better formatting support
         DataFormatter formatter = new DataFormatter();
         return formatter.formatCellValue(cell);
     }
 
     /**
-     * Generates a random invalid mobile number and writes it to the specified location in the Excel sheet.
-     *
-     * @param sheetName Excel sheet name
-     * @param row       zero-based row index
-     * @param col       zero-based column index
+     * Generates a random invalid mobile number and writes it to Excel.
      */
     public static void generateAndSaveInvalidMobileNumber(String sheetName, int row, int col) {
         String invalidMobile = generateInvalidMobileNumber();
@@ -131,14 +157,11 @@ public class ExcelUtils {
     }
 
     /**
-     * Generates an invalid mobile number starting with digits 0-4 (assumed invalid in domain),
-     * followed by 9 random digits.
-     *
-     * @return invalid mobile number string of length 10
+     * Generates an invalid mobile number starting with digits 0-4.
      */
     private static String generateInvalidMobileNumber() {
         Random rand = new Random();
-        int firstDigit = rand.nextInt(5); // digits 0 to 4 - presumably invalid start digit
+        int firstDigit = rand.nextInt(5);
         StringBuilder number = new StringBuilder(String.valueOf(firstDigit));
         for (int i = 1; i < 10; i++) {
             number.append(rand.nextInt(10));

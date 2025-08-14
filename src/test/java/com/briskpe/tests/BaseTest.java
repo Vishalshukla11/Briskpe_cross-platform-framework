@@ -128,6 +128,22 @@ public class BaseTest {
         }
     }
 
+    public void VerifyOtpScreen() {
+        try {
+            LoginPage login = new LoginPage();
+            String otp = Config.get("OTP");
+            extentTest.get().info("📲 Entering OTP...");
+            Assert.assertTrue(login.isEnterOtpTabDisplayed(), "❌ OTP screen not visible");
+            login.enterOTP(otp);
+            Assert.assertTrue(elementUtils.isElementDisplayed(login.getVerifyButton()), "❌ Verify button not visible");
+            login.clickVerifyButton();
+        }
+        catch (Exception e) {
+            logger.log(Level.SEVERE, "Otp screen verification failed: ", e);
+            Assert.fail("Otp screen verification failed:: " + e.getMessage(), e);
+        };
+    }
+
     /**
      * Performs login and skips app tour if displayed.
      */

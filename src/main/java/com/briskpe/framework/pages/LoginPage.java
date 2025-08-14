@@ -3,6 +3,7 @@ package com.briskpe.framework.pages;
 import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.core.Platform;
 import com.briskpe.framework.utils.WaitUtils;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,7 +27,8 @@ public class LoginPage {
 
     private By loginTab() {
         return switch (platform) {
-            case WEB, ANDROID, IOS, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='mobile_number_entry']");
+            case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[@flt-semantics-identifier='mobile_number_entry']");
+            case ANDROID, IOS -> AppiumBy.flutterKey("mobile-number-entry");
         };
     }
 

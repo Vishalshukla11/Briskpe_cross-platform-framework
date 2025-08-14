@@ -179,6 +179,7 @@ public class DriverFactory {
         return URI.create(Config.get("appium.url", "http://127.0.0.1:4723")).toURL();
     }
 
+
     private static String requiredConfig(String key) {
         String value = Config.get(key);
         if (value == null || value.isEmpty()) {
