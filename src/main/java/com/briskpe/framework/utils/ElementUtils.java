@@ -1,6 +1,7 @@
 package com.briskpe.framework.utils;
 
 import com.briskpe.framework.core.DriverFactory;
+import com.briskpe.framework.core.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,7 +17,7 @@ public class ElementUtils {
      * Constructor initializes driver from ThreadLocal DriverFactory to support parallel execution.
      */
     public ElementUtils() {
-        this.driver = DriverFactory.getDriver();  // Use DriverFactory to get current thread's driver
+        this.driver = DriverManager.getDriver();  // Use DriverFactory to get current thread's driver
     }
 
     public ElementUtils(WebDriver driver) {

@@ -1,6 +1,7 @@
 package com.briskpe.framework.pages;
 
 import com.briskpe.framework.core.DriverFactory;
+import com.briskpe.framework.core.DriverManager;
 import com.briskpe.framework.core.Platform;
 import com.briskpe.framework.utils.WaitUtils;
 import io.appium.java_client.AppiumBy;
@@ -12,6 +13,7 @@ import java.time.Duration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  * Page object representing the Login screen supporting Web, Mobile Web, Android, and iOS.
  * Uses platform-aware locators and provides actions for login workflow.
@@ -20,7 +22,7 @@ public class LoginPage {
 
     private static final Logger logger = Logger.getLogger(LoginPage.class.getName());
 
-    private final WebDriver driver = DriverFactory.getDriver();
+    private final WebDriver driver = DriverManager.getDriver();
     private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
 
     /* ---------- Locators ---------- */
@@ -75,7 +77,7 @@ public class LoginPage {
     public boolean isLoginTabDisplayed() {
         try {
             if (platform == Platform.WEB) {
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
                 WebElement placeholder = wait.until(ExpectedConditions.presenceOfElementLocated(
                         By.cssSelector("#body > flt-semantics-placeholder")
                 ));

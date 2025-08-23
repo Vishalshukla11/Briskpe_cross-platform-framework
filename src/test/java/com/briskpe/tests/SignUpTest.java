@@ -6,6 +6,7 @@ import com.briskpe.framework.pages.SignUp;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import com.briskpe.framework.utils.WaitUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -37,6 +38,9 @@ public class SignUpTest extends BaseTest {
         signUp.isGetOtpButtonClickble();
         signUp.clickGetOtpButton();
         VerifyOtpScreen();
+        Thread.sleep(7000);
+        JavascriptExecutor js= (JavascriptExecutor) driver;
+        js.executeScript(Config.get("js.Query"));
         Thread.sleep(7000);
 signUp.isSelectAccountTypePageVisible();
 

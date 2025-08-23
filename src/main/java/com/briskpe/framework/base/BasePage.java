@@ -1,33 +1,52 @@
 package com.briskpe.framework.base;
 
+import com.briskpe.framework.utils.WaitUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.briskpe.framework.core.Platform;
+import com.briskpe.framework.core.Config;
+
+import static com.briskpe.framework.core.DriverManager.getDriver;
+
 /**
- * BasePage provides common utility methods for interacting with WebElements safely,
- * including visibility checks, logging, and exception handling.
+ * BasePage provides common utility methods for interacting with elements across
+ * Web, Android, iOS, and Mobile Web platforms safely, with visibility checks and logging.
  */
 public class BasePage {
 
     private static final Logger logger = Logger.getLogger(BasePage.class.getName());
 
     /**
-     * Enters text into a WebElement (e.g., input field) after checking if it is displayed.
-     *
-     * @param element     WebElement where text is to be entered
-     * @param text        Text to enter
-     * @param elementName Logical name for logging purposes
+     * Returns platform-specific locator based on current platform.
      */
-    public void enterText(WebElement element, String text, String elementName) {
+    private By getLocatorForPlatform(By webLocator, By androidLocator, By iosLocator) {
+        String platform = Config.get("platform", "WEB").toUpperCase();
+        switch (platform) {
+            case "ANDROID":
+                return androidLocator != null ? androidLocator : webLocator;
+            case "IOS":
+                return iosLocator != null ? iosLocator : webLocator;
+            case "MOBILE_WEB":
+            case "WEB":
+            default:
+                return webLocator;
+        }
+    }
+
+    /**
+     * Enter text into element safely for all platforms.
+     */
+    public void enterText(By webLocator, By androidLocator, By iosLocator, String text, String elementName) {
         try {
-            if (element.isDisplayed()) {
-                element.clear();
-                element.sendKeys(text);
-                logger.info("✅ Entered text into '" + elementName + "': " + text);
-            } else {
-                logger.warning("⚠️ Element '" + elementName + "' is not visible to enter text.");
-            }
+            By locator = getLocatorForPlatform(webLocator, androidLocator, iosLocator);
+            WaitUtils.untilVisible(locator, 30);
+            WebElement element = getDriver().findElement(locator);
+            element.clear();
+            element.sendKeys(text);
+            logger.info("✅ Entered text into '" + elementName + "': " + text);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "❌ Exception while entering text in '" + elementName + "': " + e.getMessage(), e);
             throw new RuntimeException("Failed to enter text in '" + elementName + "'", e);
@@ -35,19 +54,15 @@ public class BasePage {
     }
 
     /**
-     * Clicks a WebElement safely after confirming visibility.
-     *
-     * @param element     WebElement to click
-     * @param elementName Logical name for logging purposes
+     * Click element safely for all platforms.
      */
-    public void clickElement(WebElement element, String elementName) {
+    public void clickElement(By webLocator, By androidLocator, By iosLocator, String elementName) {
         try {
-            if (element.isDisplayed()) {
-                element.click();
-                logger.info("✅ Clicked on '" + elementName + "'");
-            } else {
-                logger.warning("⚠️ Element '" + elementName + "' is not visible to click.");
-            }
+            By locator = getLocatorForPlatform(webLocator, androidLocator, iosLocator);
+            WaitUtils.untilVisible(locator, 30);
+            WebElement element = getDriver().findElement(locator);
+            element.click();
+            logger.info("✅ Clicked on '" + elementName + "'");
         } catch (Exception e) {
             logger.log(Level.SEVERE, "❌ Exception while clicking on '" + elementName + "': " + e.getMessage(), e);
             throw new RuntimeException("Failed to click on '" + elementName + "'", e);

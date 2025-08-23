@@ -11,7 +11,8 @@ import org.openqa.selenium.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.briskpe.framework.core.DriverFactory.getDriver;
+
+import static com.briskpe.framework.core.DriverManager.getDriver;
 import static com.briskpe.framework.utils.RandomDataUtils.getRandomEmail;
 import static com.briskpe.framework.utils.RandomDataUtils.getRandomMobileNumber;
 
@@ -67,7 +68,9 @@ public class SignUp extends BasePage {
     private By singUpButtonLocator() {
         return switch (platform) {
             case WEB, MOBILE_WEB -> By.xpath("//flt-semantics[contains(text(),\"Don’t have an account \")]");
-            case ANDROID, IOS -> AppiumBy.flutterKey("get-otp-button");
+            case ANDROID, IOS -> AppiumBy.flutterKey("//android.widget.Button[@content-desc=\"Don’t have an account ?\n" +
+                    "sign_up\n" +
+                    "Sign Up\"]");
         };
     }
 
@@ -289,28 +292,7 @@ public class SignUp extends BasePage {
     }
 
 
-//    public void selectAccountType(String accountType) {
-//        By locator = getAccountTypeLocator(accountType);
-//
-//        try {
-//            // Wait until visible
-//            WaitUtils.waitForElementVisible(locator, 30);
-//            WebElement element = getDriver().findElement(locator);
-//
-//            try {
-//                element.click();
-//                logger.info("✅ Successfully clicked account type: " + accountType);
-//            } catch (ElementNotInteractableException e) {
-//                logger.warning("⚠️ Normal click failed for account type: " + accountType + ". Trying JS click...");
-//                JavaScriptUtils.clickElementWithJS(getDriver(), element);
-//                logger.info("✅ JS click executed for account type: " + accountType);
-//            }
-//
-//        } catch (Exception e) {
-//            logger.log(Level.SEVERE, "❌ Failed to select account type: " + accountType, e);
-//            throw new RuntimeException("Could not select account type: " + accountType, e);
-//        }
-//    }
+
 public void selectAccountType() {
     String accountType = "Company"; // default
     By locator = getAccountTypeLocator();

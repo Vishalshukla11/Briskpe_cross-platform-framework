@@ -1,6 +1,7 @@
 package com.briskpe.framework.utils;
 
 import com.briskpe.framework.core.DriverFactory;
+import com.briskpe.framework.core.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +30,7 @@ public class WaitUtils {
      * @return true if element is visible within timeout, false otherwise
      */
     public static boolean untilVisible(By locator, int timeoutInSeconds) {
-        WebDriver driver = DriverFactory.getDriver();
+        WebDriver driver = DriverManager.getDriver();
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -59,7 +60,7 @@ public class WaitUtils {
      * @throws org.openqa.selenium.TimeoutException if element is not clickable within timeout
      */
     public static WebElement untilClickable(By locator, int timeoutInSeconds) {
-        WebDriver driver = DriverFactory.getDriver();
+        WebDriver driver = DriverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
@@ -84,7 +85,7 @@ public class WaitUtils {
      * @return WebElement once present, or null if timeout exceeded
      */
     public static WebElement untilPresent(By locator, int timeoutInSeconds) {
-        WebDriver driver = DriverFactory.getDriver();
+        WebDriver driver = DriverManager.getDriver();
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
             return wait.until(ExpectedConditions.presenceOfElementLocated(locator));

@@ -2,6 +2,7 @@ package com.briskpe.framework.pages;
 
 import com.briskpe.framework.base.BasePage;
 import com.briskpe.framework.core.DriverFactory;
+import com.briskpe.framework.core.DriverManager;
 import com.briskpe.framework.core.Platform;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import com.briskpe.framework.utils.MouseActionsUtil;
@@ -19,7 +20,7 @@ public class UsersProfile extends BasePage {
 
     private static final Logger logger = Logger.getLogger(UsersProfile.class.getName());
 
-    private final WebDriver driver = DriverFactory.getDriver();
+    private final WebDriver driver = DriverManager.getDriver();
     private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
 
     // ========== LOCATORS ========== //

@@ -1,7 +1,6 @@
 package com.briskpe.framework.pages;
 
 import com.briskpe.framework.core.Config;
-import com.briskpe.framework.core.DriverFactory;
 import com.briskpe.framework.core.Platform;
 import com.briskpe.framework.utils.JavaScriptUtils;
 import com.briskpe.framework.utils.WaitUtils;
@@ -17,6 +16,9 @@ import org.openqa.selenium.WebElement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.briskpe.framework.core.DriverManager.getDriver;
+
+
 /**
  * Page object representing the DashBoard page for the cross-platform Flutter-based app.
  * Supports Web, Mobile Web, Android, and iOS using platform-specific locators and actions.
@@ -25,7 +27,7 @@ public class DashBoard {
 
     private static final Logger logger = Logger.getLogger(DashBoard.class.getName());
 
-    private final WebDriver driver = DriverFactory.getDriver();
+    private final WebDriver driver = getDriver();
     private final Platform platform = Platform.fromString(System.getProperty("platform", "WEB"));
     private final MouseActionsUtil mouseActionsUtil = new MouseActionsUtil(driver);
 
@@ -388,20 +390,11 @@ public class DashBoard {
             return false;
         }
     }
-
-    /**
-     * Helper method to click an element with logging and exception handling.
-     * @param locator By locator of the element
-     * @param elementName Logical name of the element for logs
-     */
-    private void clickElement(By locator, String elementName) {
-        try {
-            WebElement element = driver.findElement(locator);
-            element.click();
-            logger.info("Clicked on " + elementName + " button.");
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to click " + elementName + " button: " + e.getMessage(), e);
-            throw new RuntimeException("Failed to click " + elementName, e);
-        }
+    public void   clickElement(By locator, String skip) {
+        WaitUtils.untilVisible(locator, 30); // Wait until element is visible
+        WebElement element = getDriver().findElement(locator);
+        element.click();  // Perform click
     }
+
+
 }

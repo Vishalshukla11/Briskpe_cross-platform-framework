@@ -1,6 +1,7 @@
 package com.briskpe.framework.utils;
 
 import com.briskpe.framework.core.DriverFactory;
+import com.briskpe.framework.core.DriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +28,7 @@ public class ScreenshotUtils {
      * @return absolute path of the screenshot file, or null if screenshot is not supported
      */
     public static String takeScreenshot(String testName) {
-        WebDriver driver = DriverFactory.getDriver();
+        WebDriver driver = DriverManager.getDriver();
 
         if (!(driver instanceof TakesScreenshot)) {
             logger.warning("Driver does not support taking screenshots.");
